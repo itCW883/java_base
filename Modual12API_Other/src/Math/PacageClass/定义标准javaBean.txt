@@ -1,0 +1,49 @@
+定义标准javaBean:
+        定义JavaBean一般会将基本数据类型的属性定义为包装类型的属性
+
+                若uid是integer类型,默认值为空
+                javabbean都是和数据库的表相联系的,可以将jAVAbean中的数据添加到数据表中
+                若uid为主键自增(数据库的约束),此时添加语句uid的数据不需要手动维护
+                sql语句可以写成:insert into user(uid,unane,pwd) values(NULL,"王城","Wang0810)
+                如果uid为主键自增,且javabane中的uid为包装类型,默认值为null,就不用单独给udi赋值啦,
+                                就可以直接使用uid的默认值,将uid放入sql语句中
+                将JavaBean中的属性变为包装类型还可以使用包装类中的方法去操作此属性值
+
+        public class ProtalJavaBean {
+            private Integer uid;//标准JavaBean不使用基本数据类型
+            private String uname;
+            private String pws;
+
+            public Integer getUid() {
+                return uid;
+            }
+
+            public void setUid(Integer uid) {
+                this.uid = uid;
+            }
+
+            public String getUname() {
+                return uname;
+            }
+
+            public void setUname(String uname) {
+                this.uname = uname;
+            }
+
+            public String getPws() {
+                return pws;
+            }
+
+            public void setPws(String pws) {
+                this.pws = pws;
+            }
+
+            public ProtalJavaBean(String uname, Integer uid, String pws) {
+                this.uname = uname;
+                this.uid = uid;
+                this.pws = pws;
+            }
+
+            public ProtalJavaBean() {
+            }
+        }

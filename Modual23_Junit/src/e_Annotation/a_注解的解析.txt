@@ -1,0 +1,45 @@
+注解的解析:
+    简单理解:获取出注解中的属性值
+注解可以用来替代配置文件
+
+
+涉及接口:
+    AnnotatedElement
+    实现类:
+    AccessibleObject ， Class ， Constructor ， Executable ， Field ， Method ， Package ， Parameter
+注解解析与反射相关
+
+解析思路:
+    1:先判断指定位置上是否有指定的注解;若有就获取指定的注解,在获取注解中的属性值
+    判断注解方法:
+    default boolean isAnnotationPresent(class<? extends Annotation> annotationClass)
+    参数为:class<? extends Annotation> annotationClass;表示注解的Class类型
+    该方法用于判断指定位置上是否有指定的注解
+    如果此元素上 存在指定类型的注释，则返回true，否则返回false。
+
+    2:若存在就获取该注解
+    获取方法:
+    <T extends Annotation>
+    T getAnnotation(类<T> annotationClass)
+    返回值类型为获取注解的class类型
+    获取指定的注解
+    返回该元素的，如果这样的注释 ，否则返回null指定类型的注释。
+
+例子:
+    //1:获取要判断注解位置所在类的class对象
+     Class<a_bookShelf> abook = a_bookShelf.class;
+     //2:判断指定类上有没有指定注解
+     boolean annotationPresent = abook.isAnnotationPresent(Book.class);
+     //3:判断 ,判断函数的返回值是否为真
+     if(annotationPresent){
+    //4:获取属性值
+         Book annotation = abook.getAnnotation(Book.class);
+         System.out.println(annotation.bookname());
+         System.out.println(annotation.quality());
+         System.out.println(annotation.price());
+         System.out.println(Arrays.toString(annotation.authors()));
+     }
+     System.out.println(annotationPresent);//false
+     /**原因:注解未加载到内存中;因此导致判断失败
+     解决方法:
+            使用元注解中的@Retention(RetentionPolicy.RUNTIME)*/

@@ -1,0 +1,7 @@
+StringBuilder的常用方法:
+          1:append(任意类型数据)-->字符串拼接,返回StringBuilder自己
+                    往缓冲区存东西,返回的是StringBuilder对象,但是不是新对象]
+
+          2:reverse();//翻转字符串
+
+          3:toString()//将StringBuilder转为String方法[方便调用String中的方法处理字符串]

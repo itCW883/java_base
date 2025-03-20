@@ -1,0 +1,42 @@
+Thread中的方法:
+        void start()
+        导致此线程开始执行; Java虚拟机调用此线程的run方法。
+
+        void run()
+        设置线程任务,Thread重写的接口Runnable中的方法
+
+        String getName()
+        获取此线程的名称。
+
+        void setName(String name)
+        将此线程的名称更改为等于参数 name 。
+
+        static Thread currentThread()
+        返回对当前正在执行的线程对象的引用。
+        此方法在哪个线程中使用获取的就是哪个线程的对象
+
+        static void sleep(long millis)
+        使当前正在执行的线程以指定的毫秒数暂停（暂时停止执行），具体取决于系统定时器和调度程序的精度和准确性。
+        线程睡眠,超时后会自动执行
+
+        void setPriority(int newPriority)
+        更改此线程的优先级。 优先级越高的线程抢到cpu使用权的几率越大,不是每次都能先抢到
+
+        int getPriority()
+        获取此线程的优先级。
+
+        void setDaemon(boolean on)
+        设置为守护线程
+        将此线程标记为 daemon线程或用户线程。
+        线程设置为守护线程时,当非守护线程执行完毕,守护线程就会结束
+
+
+        static void yield()
+        礼让线程,让当前cpu让出使用权
+        对调度程序的一个暗示，即当前线程愿意产生当前使用的处理器
+        //场景:两个线程一起执行(一会a线程一会b线程,或者a执行完毕b在执行)
+               礼让线程可以让线程 尽量 交替执行(效果不一定明显)
+
+        void join()
+        插入线程/插队线程
+        等待这个线程死亡。

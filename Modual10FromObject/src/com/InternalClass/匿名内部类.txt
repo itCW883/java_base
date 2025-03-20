@@ -1,0 +1,95 @@
+匿名内部类: [可以显示声明出类名的内部类]
+
+    普通情况调用接口的方法:
+        1:创建实现类,实现接口
+        2:重写方法
+        3:创建实现类对象
+        4:调用方法
+
+匿名内部类格式:
+    1://[只能调用一个方法]
+    new 接口/抽象类(){
+            重写的方法
+    } .重写的方法
+     [new...{...}代表实现类对象]
+
+     //有名对象[取名只是给对象起名]
+    2://[可以调用多个方法]
+    类型 对象名 = new 接口/抽象类(){
+            重写的方法
+    }
+    对象名.重写的方法
+
+        例:  public static void main(String[] args) {
+        //格式一[只能调用一个方法]
+                    new USB(){
+
+                        @Override
+                        public void OPen() {
+                            System.out.println("鼠标连接主机");
+                        }
+
+                        @Override
+                        public void CLOSE() {
+
+                        }
+                    }.OPen();
+
+                    System.out.println("======================");
+        //格式二  [可以调用多个方法]
+                    USB keyBoard = new USB() {
+                        @Override
+                        public void OPen() {
+                            System.out.println("键盘连接主机");
+                        }
+
+                        @Override
+                        public void CLOSE() {
+
+                            System.out.println("键盘与主机的连接以断开");
+                        }
+                    };
+                    keyBoard.OPen();
+                    keyBoard.CLOSE();
+                }
+
+    匿名内部类的使用场景:1:只是需要简单调用一次某个接口/抽象类的方法时[使用匿名内部类格式匿名内部类会自动编译生成]
+
+
+匿名内部类做参数传递或返回值返回:
+        public static void main(String[] args) {
+            Method01(new USB() {
+                @Override
+                public void OPEN() {
+                    System.out.println("USB接口打开");
+                }
+
+                @Override
+                public void CLOSE() {
+                    System.out.println("USB接口关闭");
+                }
+            });
+            System.out.println("===================");
+
+            USB usb=Method02();
+            usb.CLOSE();
+        }
+    //匿名内部类做参数传递:
+        public static void Method01(USB usb){
+            usb.OPEN();
+        }
+    匿名内部类做返回值返回:
+        public static USB Method02(){
+            return new USB() {
+                @Override
+                public void OPEN() {
+                    System.out.println("USB接口打开");
+                }
+
+                @Override
+                public void CLOSE() {
+                    System.out.println("USB接口关闭");
+                }
+            };
+        }
+

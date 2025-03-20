@@ -1,0 +1,37 @@
+线程创建:
+        1:定义一个类继承Thread
+        public class MyThread extends Thread{
+            @Override
+
+        }
+
+        2:重写run()方法,写的是线程任务(此线程具体要做的事)
+         public void run() {
+                        //设置线程任务
+                        for (int i = 0; i < 5; i++) {
+                            System.out.println("这是一个线程任务执行的第"+i+"次");
+                        }
+                    }
+
+        3:创建自定义线程类对象
+         MyThread MT = new MyThread();
+        4:调用Thread中的start方法启动线程,jvm自动调用run方法
+                直接调用run()不可行,直接调用run方法只是简单的使用这个方法,并非开启多线程
+                线程想要执行,必须先开启线程
+
+
+           //调用Start方法,开启线程
+           MT.start();
+
+           //MT.run();//直接调用重写的run()方法,不代表开启线程
+                   //如果直接调用这个方法会现在执行run()方法的方法体,在运行主线程
+
+           for (int i = 0; i < 10; i++) {
+               System.out.println("这是主线程运行的" + i + "次");
+           }
+           //每次执行结果不一样,因为java是用的抢占式调度线程
+
+
+两种线程实现方式的区别:
+    1:继承Thread;有继承的局限性,不能同时继承两个类
+    2:实现Runnable接口的方法,没有继承的局限性(接口可以多继承多实现;还可以实现接口的同时继承其它的类)

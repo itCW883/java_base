@@ -1,0 +1,42 @@
+Junit单元测试:
+    概述:
+        Junit是一种单元测试框架;可以代替main方法去执行其他的方法
+    作用:
+        可以单独执行一个方法;测试该方法是否能跑通
+    使用步骤:
+        1:Junit是第三方工具使用前需要导jar包
+        2:定义一个方法;在方法上写一个注解:@Test
+        3:执行:
+               1:点击被@Test注解方法旁边的小三角;run执行(单独执行某个方法)
+               2:点击类旁边的三角执行(执行当前类中全部被@Test注解的方法)
+
+    例子:
+        @Test
+            public void add(){
+                System.out.println("我是@teat执行的add方法");
+            }
+        @Test
+            public void delete(){
+                System.out.println("我是@teat执行的deleted方法");
+            }
+
+    注意:
+        1:@Test不能修饰static修饰的方法
+        2:@Test不能修饰带参数的方法
+        3:@Test不能修饰带返回值的方法
+
+其他注解:
+    例子:
+        @Before//会先于@Test修饰的方法执行
+        public void methodBefore(){
+            System.out.println("我是@Before执行的方法");
+        }
+        @After//会后于@Test修饰的方法执行
+        public void methodAfter(){
+            System.out.println("我是@After执行的方法");
+        }
+    @Be//会先于@Test修饰的方法执行
+        一般用于初始化数据使用
+    @After//会后于@Test修饰的方法执行
+        一般用于释放资源使用
+    这两个注解会根据@Test修饰的方法(可以是多个方法)执行的次数执行相应的次数

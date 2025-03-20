@@ -1,0 +1,28 @@
+问题:
+    InvalidClassException
+    stream classdesc serialVersionUID = -7813898167163615055, local class serialVersionUID = -170996723486700239
+原因:
+   序列化后;修改源码;修改完源码后没有进行重新序列化就会出现:序列号冲突问题
+分析:
+    序列化时:写好的类源码实现了序列化接口编译后生成class文件;在文件中会自动生成序列号
+    反序列化时:会使用文件中的序列号与class文件中的序列号进行比对若一样就会反序列化成功;反之不成功
+    修改源码后重新编译会生成一个新的序列号;因为没有重新序列化所以此时class文件的序列号还是之前序列化时的序列号;
+            因此class文件就会与源文件就会出现序列号不匹配问题
+
+解决办法:
+static final long serialVersionUID = 42L;重点
+
+    直接写死序列号:
+        在序列化的对象中加上一个Public Static final 的变量(数据类新为long型),并为其赋值
+    例:
+        public class texPerson implements Serializable
+            //必须要实现Serializable接口才能被序列化
+        {
+            static final long serialVersionUID = 40L;
+            private String name;
+            public transient Integer age;
+            //transient使用此关键字可以不被序列化
+            ...}
+
+
+注意:将一个对象实现一个序列化接口;将来才能把这个对象变为二进制在网络中传输

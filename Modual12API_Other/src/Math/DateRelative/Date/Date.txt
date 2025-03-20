@@ -1,0 +1,27 @@
+Date:表示一个特定的瞬间,可以精确到毫秒
+        1000毫秒等于1秒
+        时间原点:1970年1月1日0时0分0秒(UNIX系统起始时间):格林威治时间,在0时区
+        时区:两个时区之间经度相差15度,时间相差一小时;北京时区比时间原点得时区相差八小时时间
+        北京经纬度:东经116,北纬30.56
+        赤道:0度纬线
+        本初子午线:0度经线
+
+     构造方法:
+             无参构造:
+             Date date1 = new Date();//空参构造可以获取当前系统时间
+             System.out.println("date1 = " + date1);
+
+             有参构造:
+             //Date(Long time)-->获取指定时间传递毫秒值
+             Date date = new Date(1000L);
+             System.out.println("date = " + date);//使用这个有参构造;时间是由时间原点结合电脑得时区和传入的参数计算的
+
+     方法:
+        //1:void setTime (Long time)-->设置时间传递毫秒值,从时间原点开始
+
+        //2:Long getTime()-->获取时间,返回毫秒值
+              例:Date d1 = new Date();
+                //1:void setTime (Long time)-->设置时间传递毫秒值,从时间原点开始
+                d1.setTime(1000L);
+                //2:Long getTime()-->获取时间,返回毫秒值
+                System.out.println("d1.getTime() = " + d1.getTime());

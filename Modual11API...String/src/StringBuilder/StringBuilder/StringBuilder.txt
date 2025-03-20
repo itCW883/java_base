@@ -1,0 +1,35 @@
+StringBuilder:
+        是一个可变的字符序列
+        提供了一套和StringBuffer兼容的API:[StringBuilder和StringBuffer的方法是一样的]
+        但是StringBuilder不保证同步(不保证线程同步,意味着线程不安全,效率高)
+     作用:主要为拼接字符串
+          Sting拼接字符串的缺点:每拼接一次就会产生一个新的对象,拼接过多会占用内存,且效率低下
+          StringBuilder底层自带一个缓冲区;底层没有被final修饰的byte数组;拼接字符串后都会在缓冲区保存,拼接的过程不会随意产生新的对象
+
+StringBuilder的特点:
+         1:底层自带缓冲区,且缓冲区是没有被final修饰byte数组,默认长度为16
+         2:若超出数组长度,数组会自动扩容(创建一个新数组,将老数组的元素放入新数组中,再把新数组的地址值赋值给老数组)
+         3:默认每次扩容老数组得2倍+2
+            如果一次性添加得数组超出了默认数组扩容的长度(2n+2),按照实际数据个数为准
+
+StringBuilder的常用方法:
+          1:append(任意类型数据)-->字符串拼接,返回StringBuilder自己
+                    往缓冲区存东西,返回的是StringBuilder对象,但是不是新对象]
+
+          2:reverse();//翻转字符串
+
+          3:toString()//将StringBuilder转为String方法[方便调用String中的方法处理字符串]
+
+StringBuilder和StringBuffer的区别:
+          相同点:
+                用法一样,作用一样
+          不同点:
+                StringBuilder比StringBuffer的效率更高
+                StringBuilder线程不安全
+                StringBuffer线程安全
+
+字符串拼接效率排序:
+        StringBuilder > StringBuffer > String
+
+ //链式调用[调用某一个方法,该方法返回了一个对象,再接着调用方法(返回对象的所有方法)]
+        例: sb.append("李锐").append("love").append("六六六");

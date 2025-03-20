@@ -1,0 +1,62 @@
+注解:
+    应用数据类型:
+        类,数组,接口,枚举了,注解
+    注解的作用:
+        1:对代码进行说明;生成DOC文档
+        2:检查代码是否符合条件  //  @Deprecated//该注解代表此方法已过时,不推荐使用
+        3:对代码进行分析;起到了代替配置文件的作用
+
+注解也可以用于生成.doc文档(API文档)
+@Deprecated//该注解代表此方法已过时,不推荐使用
+@SuppressWarnings("all")//消除所有警告(压制警告)
+
+注解属性本质上是一个接口(该接口默认继承Annotation接口)
+反编译
+    D:\DeskTop>javap Book.class
+    Compiled from "Book.java"
+    public interface Book extends java.lang.annotation.Annotation {
+      public abstract java.lang.String bookname();
+      public abstract java.lang.String[] authors();
+      public abstract double price();
+      public abstract int quality();
+    }
+
+
+    注解关键字:@interface
+    定义格式:
+
+        元注解
+        public  @interface 注解名{}
+    定义注解属性(本质抽象方法):
+            目的:增强注解的作用
+                格式:
+                   1:  数据类型 属性名 (); -->此属性没默认值;需要在使用次注解时赋值;这样的属性使用时必须赋值;否则报错
+                   2:  数据类新 属性名 () default 值 ; -->这样写证明此属性有默认值;若有需要可以进行二次赋值
+
+        注解必须要有返回值
+        注意:
+        ①:属性的返回值类型有要求:
+          属性的返回值只能是下列要求
+            1:基本数据类型(4类8种)
+            2:String
+            3:枚举
+            4:注解
+            5:以上类型的数组
+        ②:定义的属性在使用时需要对属性赋值(但是定义时可以default定义一个默认值;使用时不赋值就取默认值)
+            给属性名定义为value;若只有一个属性;需要赋值时value可以省略
+            数组赋值时需要用{}包裹;若数组中只有一个值可以省略{}
+
+
+      定义注解例子:
+      public @interface Book {
+          String bookname();
+          String[] authors();
+          double price();
+          int quality() default 100;
+      }
+
+
+            注意(注解中可以定义的属性):
+                1:八种基本类型
+                2:String类型, class类型 , 枚举类型 , 注解类型
+                3:1,2中所提到类型的一维数组

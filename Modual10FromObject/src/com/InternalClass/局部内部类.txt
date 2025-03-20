@@ -1,0 +1,104 @@
+局部内部类
+     可以定义在方法中;构造中,代码块中
+     局部内部类成员调用例:
+            public class Person {
+                public void eat(){
+                    class Heart{
+                        public void junp(){
+                            System.out.println("心脏框框跳");
+                        }
+                }
+                //实例化调用局部内部类
+                    Heart heart = new Heart();
+                    heart.junp();
+                //匿名调用局部内部类
+                    System.out.println("+++++++++++");
+                    new Heart().junp();
+                }
+            }
+接口作为方法的实参传递或者方法的返回值 :
+             //接口作为方法参数,传递实参时传递的是实现类对象
+            //接口作为返回值类型实际返回的是实现类对象
+
+     public static void main(String[] args) {
+             Methoud(new Mouse());
+     // 返回值是什么类型就用什么类型(接口也算类型)接收对象
+     // [此处接收方法返回的对象;还是多态形式]
+
+            USB m1=Methoud02();//相当于USB m1 = new Mouse();
+                             // 因为返回值是:return new Mouse();
+             m1.OPEN();
+         }
+         //接口作为方法参数,传递实参时传递的是实现类对象
+         public static void Methoud(USB usb){//USB usb=new Mouse
+             if(usb instanceof Mouse){
+                 usb.OPEN();
+             }
+         }
+         //接口作为返回值类型实际返回的是实现类对象
+         public static USB Methoud02(){
+
+             /*
+             *  Mouse mouse = new Mouse();
+             return mouse;
+             * */
+             //匿名对象返回
+             return new Mouse();
+         }
+
+抽象类作为方法的实参传递或者方法的返回值
+          //抽象类作为方法参数,传递实参时传递的是子类对象
+          //抽象类作为返回值类型实际返回的是子类对象
+
+         public static void main(String[] args) {
+             Dog dog = new Dog();
+             Methoud(dog);
+             System.out.println("=============");
+             Animal dog2= Methou02d();
+             dog2.eat();
+         }
+         public static void Methoud(Animal animal)
+         {
+            animal.eat();
+                }
+         public static Animal Methou02d(){
+             /*Dog dog = new Dog();
+             return dog;*/
+             return new Dog();
+         }
+
+普通类作为方法的实参传递或者方法的返回值
+          //普通类作为方法参数,传递实参时传递的是对象
+          //普通类作为返回值类型返回的是对象
+    public static void main(String[] args) {
+            Person person = new Person();
+            Methoud01(person);
+            System.out.println("================");
+            Person p2=Methoud02();
+            p2.eat();
+        }
+        public static void Methoud01(Person person){
+            person.eat();
+        }
+        public static Person Methoud02(){
+           /* Person person = new Person();
+            return person;*/
+            return new Person();
+        }
+
+//局部内部类的使用
+  public static void main(String[] args) {
+        USB usb = Method();//USB usb = new Mouse();
+        usb.OPEN();
+    }
+    public static USB Method(){
+        //局部内部类
+        class Mouse implements USB{
+
+            @Override
+            public void OPEN() {
+                System.out.println("鼠标打开USB连接电脑");
+            }
+        }
+        return new Mouse();
+    }

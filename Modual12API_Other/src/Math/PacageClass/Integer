@@ -1,0 +1,51 @@
+Integer:
+    int的包装类是Integer
+
+装箱:将基本类型转为对应的包装类
+        valueOf():
+拆箱:将包装类转为基本数据类型
+        int intvalue()
+            例: Integer itg1 = Integer.valueOf(10)
+                int i1 = itg1.intValue();
+                System.out.println(i1+10)
+
+    int如何转换为Integer:
+        1.构造方法[不推荐使用]:
+                Integer(int value)
+                Integer(String s)注意s必须是数字形式
+
+            Integer it1 = new Integer(10);//已过时 'Integer(int)' 自版本 9 起已弃用并标记为移除
+            System.out.println(it1);
+            Integer it2 = new Integer("123456789");//'Integer(java.lang.String)' 自版本 9 起已弃用并标记为移除
+            System.out.println(it2);
+
+        2.装箱[推荐使用]:
+            ①static Integer valueOf(int i)
+          返回一个 Integer指定的 int值的 Integer实例。
+            例:  Integer itg1 = Integer.valueOf(10);
+                 System.out.println(itg1);
+
+
+            ②static Integer valueOf(String s)
+          返回一个 Integer对象，保存指定的值为 String 。
+            例:  Integer itg2 = Integer.valueOf("1213456789");
+                 System.out.println(itg2);
+
+    自动拆装箱:
+             Integer i=10;//发生了自动装箱
+             System.out.println(i);
+             int sum = i + 20;//发生了自动拆箱
+             System.out.println(sum);
+
+
+int类型转换为String类型:
+              例:
+                int i=10;
+                String s1=i+"";//通过+转换为字符串类型
+                String s2 = String.valueOf(i);//通过String.valueOf()方法转换为字符串类型
+
+包装类中的ParseXXX可以将基本数据类型转换为字符串类型:
+        例:private static void Method02() {
+                int num1 = Integer.parseInt("11111");
+                System.out.println(num1 + 1);
+            }

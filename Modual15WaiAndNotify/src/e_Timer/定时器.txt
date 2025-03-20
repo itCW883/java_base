@@ -1,0 +1,21 @@
+Timer(定时器):
+    构造:Timer();无参构造
+    方法:void schedule(TimerTask task, Date firstTime, long period)
+       从指定 的时间开始 ，对指定的任务执行重复的 固定延迟执行 。
+                    参数1:TimerTask task
+                            task是一个抽象类,且是Runnable的实现类
+                    参数2:Date firstTime
+                            firstTime:从什么时间开始执行
+                    参数3:long period
+                            period:每个多长时间执行一次,设置的是毫秒值
+
+ 例子:
+ public static void main(String[] args) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName() + "执行啦");
+            }
+        },new Date(),2000);
+    }

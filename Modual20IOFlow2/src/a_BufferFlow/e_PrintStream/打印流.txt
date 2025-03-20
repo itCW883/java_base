@@ -1,0 +1,23 @@
+打印流:
+    PrintStream:
+        构造:
+            PrintStream(String fileName)
+            指定把内容打印到哪个文件中去
+            PrintStream(OutputStream out)
+            创建一个新的打印流。
+            PrintStream(OutputStream out, boolean autoFlush)
+            创建一个新的打印流。
+
+        方法:
+            void println()
+            原样输出自带换行效果
+            void print()
+            原样输出不带换行效果
+
+
+    改变流向:
+        可以让输出语句;从控制台上输出改变为向指定文件输出
+        方法:
+            System中的方法:
+                static void setOut(PrintStream out)
+                //改变流向-->让控制语句从控制台输出转移到指定文件中

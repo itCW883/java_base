@@ -1,0 +1,24 @@
+转换流:
+    转换流可以指定读取编码;字节流通向字符流的桥梁;用于读数据
+
+InputStreamReader:
+    构造方法:
+        InputStreamReader(InputStream in, String charsetName)
+        charsetName:指定编码;不区分大小写
+        创建一个使用命名字符集的InputStreamReader
+
+    作用:
+        可以按照指定的编码读取内容
+    用法:
+        基本用法和FileReader相同
+
+OutputStreamWriter:
+    构造方法:
+        OutputStreamWriter(OutputStream out, String charsetName)
+        创建一个使用命名字符集的OutputStreamWriter。
+    作用:
+           可以按照指定的编码写入内容
+       用法:
+           基本用法和FileWriter相同
+
+

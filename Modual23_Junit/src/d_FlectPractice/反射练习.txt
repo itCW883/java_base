@@ -1,0 +1,18 @@
+反射练习:
+    1:创建properties配置文件;配置信息
+        ①:问题:properties文件不要直接放在模块下;直接将properties文件放在模块下;out路径是不会生成配置文件;
+           解决:将配置文件放在src下
+        ②:问题:若将所有配置文件放入src目录下
+           解决:单独创建一个文件夹;将所有文件放入这个文件夹;命名为resources;再将这个文件夹格式改为资源目录
+           D:\xue\JAVA\Project\project1\Modual23_Junit\resources\prop.properties
+
+           className = d_FlectPractice.person
+           methodName = eat
+    2:读取配置文件;解析配置文件
+        ①问题:out路径下没有resources文件
+         解决:用类加载器
+           tClassLoader classloader = 当前类.class.getClassLoader
+           InputStream in =  classloader.getResourceAsStream("文件名")//会自动扫描,resources下的文件
+    3:根据解析出的classname创建class对象
+    4:根据解析出的MethodName,获取对应的方法
+    5:执行方法

@@ -1,0 +1,38 @@
+自定义异常(Java中没有提前定义的异常,但是自生需要使用就需要自定义异常)
+     例子 :package com.Exception.ZDYException;
+
+       import java.util.Scanner;
+
+       public class ExceptionD01 {
+           public static void main(String[] args) throws LoginUserException {
+               String userName="王城";
+               Scanner scanner =new Scanner(System.in);
+               System.out.println("请您输入要登陆的用户名");
+              String name =scanner.next();
+              if(userName.equals(name)){
+                  System.out.println("登陆成功");
+              }
+              else {
+                  //直接写自定义的异常会报错;需要提前创建一个异常类
+                  throw new LoginUserException("用户名不匹配");
+              }
+           }
+       }
+
+
+        public class LoginUserException extends Exception{
+            public LoginUserException(String message) {
+                super(message);
+            }
+        }
+
+toString:返回throwable的简短描述
+        //System.out.println(e.toString());//输出的是异常类型和设置的异常信息
+getMessage:返回throwable的详细消息字符串
+        //System.out.println(e.getMessage());//只有设置的异常信息
+printStackTrace:将此throwable及其追踪输出至标准错误
+        仅仅是打印信息不会结束程序
+        e.printStackTrace(); //打印包括异常类型,信息,行数
+                            //com.Exception.ZDYException.LoginUserException: 用户名不匹配
+                           //at com.Exception.ZDYException.ExceptionD02.main(ExceptionD02.java:18)
+

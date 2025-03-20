@@ -1,0 +1,50 @@
+元注解
+    概述:管理注解的注解(用于描述注解的注解)
+管理的方面:
+    1:可以控制注解的使用位置(如是否可以在类上使用;是否可以在方法上使用等....)
+    2:可以控制注解的生命周期(控制注解的加载位置)
+    3:控制注解是否能在源码中出现
+    4:控制注解是否能在class文件中出现
+    5:控制注解是否能在内存中出现
+
+使用方式:
+    1:@Target(用于控制注解的使用位置)
+        public @interface Target {
+            ElementType[] value();
+        }
+        属性为:ElementType[] value();
+        数据类型为枚举:ElementType[](里面的成员皆为静态可以直接枚举名调用),参数是数组
+        注意:
+            ElementType[]中成员包括:
+                TYPE:   控制注解只能使用在类上
+                FIELD:  控制注解可以使用在属性上
+                METHOD: 控制注解可以使用在方法上
+                PARAMETER:  控制注解可以使用在参数上
+                CONSTRUCTOR:    控制注解可以使用在构造方法上
+                LOCAL_VARIABLE: 控制注解可以使用在局部变量上
+                ANNOTATION_TYPE
+                PACKAGE,
+                Type parameter declaration
+                TYPE_PARAMETER,
+                TYPE_USE,
+                MODULE,
+                RECORD_COMPONENT;
+                默认在任何地方都可以使用;但是一旦指定;没有指定的地方就`不可以使用了
+         使用格式
+         @Target({ElementType.TYPE,ElementType.METHOD,...})
+
+    2:@Retention(用于控制注解的加载位置(生命周期))(也就是保留的阶段[java有三个阶段])
+        public @interface Retention {
+            RetentionPolicy value();
+        }
+        RetentionPolicy也是一个枚举类型(成员可以类名直接调用)
+
+            SOURCE:     控制注解可以在源码中出现(默认)
+            CLASS:      控制注解可以在Class文件中出现
+            RUNTIME:    控制注解可以在内存文件中出现//自定义注解一般取此值(当前被描述的注解会被保存到class字节码文件中;并被jvm虚拟机读取到)
+            使用格式:
+                @Retention(RetentionPolicy.RUNTIME)
+
+    3:@Documented:描述注解是否被抽取到API文档中
+    4:Inherited:描述注解是否被子类继承
+            加入此注解子类会自动继承该注解

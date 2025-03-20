@@ -1,0 +1,24 @@
+Stream流:
+    Stream流中的流不是指IO流;
+    Stream中的流是指一种流式编程;是一种编程方式;可以看作流水线
+
+Stream流的获取:
+    集合:
+        Collection中的方法
+        default Stream<E> stream()
+        返回以此集合作为源的顺序 Stream
+        例子:
+        Stream<String> stream = list.stream();
+
+
+    数组:
+        static <T> Stream<T> of(T... values)
+        参数为可变参;可变参的底层就是数组
+        返回其元素是指定值的顺序排序流。
+        例子:
+        Stream<String> suzhu = Stream.of("马哥", "瘦皮猴", "黑黑", "蔡国庆");
+
+ 方法:
+    void forEach(Consumer<? super T> action)
+    参数Consumer是一个java自带的函数式接口(消费型)
+    对此流的每个元素执行操作。

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Modual10FromObject/Modual10FromObject.iml" filepath="$PROJECT_DIR$/Modual10FromObject/Modual10FromObject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual10Polymorphic/Modual10Polymorphic.iml" filepath="$PROJECT_DIR$/Modual10Polymorphic/Modual10Polymorphic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual11API...String/Modual11API...String.iml" filepath="$PROJECT_DIR$/Modual11API...String/Modual11API...String.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual12API_Other/Modual12API_Other.iml" filepath="$PROJECT_DIR$/Modual12API_Other/Modual12API_Other.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual14Mltithreading/Modual14Mltithreading.iml" filepath="$PROJECT_DIR$/Modual14Mltithreading/Modual14Mltithreading.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual15WaiAndNotify/Modual15WaiAndNotify.iml" filepath="$PROJECT_DIR$/Modual15WaiAndNotify/Modual15WaiAndNotify.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual16Collection/Modual16Collection.iml" filepath="$PROJECT_DIR$/Modual16Collection/Modual16Collection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual17Collectons/Modual17Collectons.iml" filepath="$PROJECT_DIR$/Modual17Collectons/Modual17Collectons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual18Map/Modual18Map.iml" filepath="$PROJECT_DIR$/Modual18Map/Modual18Map.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual19IOfLow/Modual19IOfLow.iml" filepath="$PROJECT_DIR$/Modual19IOfLow/Modual19IOfLow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual20IOFlow2/Modual20IOFlow2.iml" filepath="$PROJECT_DIR$/Modual20IOFlow2/Modual20IOFlow2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual21Net/Modual21Net.iml" filepath="$PROJECT_DIR$/Modual21Net/Modual21Net.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual22NewJDKcareicter/Modual22NewJDKcareicter.iml" filepath="$PROJECT_DIR$/Modual22NewJDKcareicter/Modual22NewJDKcareicter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual23_Junit/Modual23_Junit.iml" filepath="$PROJECT_DIR$/Modual23_Junit/Modual23_Junit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual5Total1_9/Modual5Total1_9.iml" filepath="$PROJECT_DIR$/Modual5Total1_9/Modual5Total1_9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual6/Modual6.iml" filepath="$PROJECT_DIR$/Modual6/Modual6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual7Extend/Modual7Extend.iml" filepath="$PROJECT_DIR$/Modual7Extend/Modual7Extend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual8Abstract/Modual8Abstract.iml" filepath="$PROJECT_DIR$/Modual8Abstract/Modual8Abstract.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modual9Interface/Modual9Interface.iml" filepath="$PROJECT_DIR$/Modual9Interface/Modual9Interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module1/module1.iml" filepath="$PROJECT_DIR$/module1/module1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module1/module2/module2.iml" filepath="$PROJECT_DIR$/module1/module2/module2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module3/module3.iml" filepath="$PROJECT_DIR$/module3/module3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module4/module4.iml" filepath="$PROJECT_DIR$/module4/module4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project1.iml" filepath="$PROJECT_DIR$/project1.iml" />
+    </modules>
+  </component>
+</project>

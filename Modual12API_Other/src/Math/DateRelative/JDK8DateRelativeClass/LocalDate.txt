@@ -1,0 +1,14 @@
+LocalDate:
+         是一个不可变的日期时间对象:表示日期:通常视为年\月\日
+     获取对象方式:
+        //直接创建locldate对象
+        //static LocalDate now()
+        //从默认时区的系统时钟获取当前日期。
+        LocalDate localDate1 = LocalDate.now();
+        System.out.println("localDate1 = " + localDate1);
+
+        //创建localdate设置日期(年\月\日)
+        //static LocalDate of(int year, Month month, int dayOfMonth)
+        //从一年，一个月和一天获得一个 LocalDate的实例。
+        LocalDate localDate2 = LocalDate.of(2024, 5, 20);
+        System.out.println("localDate2 = " + localDate2);

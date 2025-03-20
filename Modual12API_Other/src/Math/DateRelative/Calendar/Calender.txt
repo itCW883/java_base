@@ -1,0 +1,55 @@
+Calendar:[日历类]
+        是一个抽象类
+        获取Calendar对象的方法:
+                static Calendar getInstance()
+                使用默认时区和区域设置获取日历
+
+        月份对比:java月份是国内实际真实月份-1
+                java中周日为1
+
+        Calendar的常用方法:
+                //int get(int field)
+                        //返回给定日历字段的值 。
+                        int mounth = calendar01.get(Calendar.MONTH);
+                        System.out.println("calendar01.get(Calendar.YEAR) = " + calendar01.get(Calendar.YEAR));
+                        System.out.println("mounth = " + mounth);
+
+                //void set(int field, int value)
+                        //将给定的日历字段设置为给定的值。
+                        calendar01.set(Calendar.YEAR,2055);
+                        System.out.println("calendar01.get(Calendar.YEAR) = " + calendar01.get(Calendar.YEAR));
+
+                //abstract void add(int field, int amount)
+                        //根据日历的规则，将指定的时间量添加或减去给定的日历字段。
+                        calendar01.add(Calendar.YEAR,-1);
+                        System.out.println(calendar01.get(Calendar.YEAR));
+                        calendar01.add(Calendar.YEAR,2);
+                        System.out.println(calendar01.get(Calendar.YEAR));
+
+                //Date getTime()
+                        //返回一个 Date表示此物体 Calendar的时间值（毫秒从偏移 Epoch “）。
+                        //将calendar转为date类型
+                        Date date = calendar01.getTime();
+                        System.out.println(date);
+
+               //void set(int year, int month, int date)
+                        //设置日历字段中的值 YEAR ， MONTH和 DAY_OF_MONTH
+                        //直接设置年月日
+                        calendar01.set(2024,8,16);
+                        Date date2 = calendar01.getTime();
+                        System.out.println(date2);
+
+
+                        //用于设置时间传入date类型数据
+                        Date date1 = new Date(0L);
+                        calendar01.setTime(date1);
+                        System.out.println(calendar01.get(Calendar.YEAR)+"   "
+                                            +calendar01.get(Calendar.MONTH)+"    "
+                                            +calendar01.get(Calendar.DATE));
+
+                        void set(int year, int month, int date)
+                        设置日历字段中的值 YEAR ， MONTH和 DAY_OF_MONTH
+                        该方法可以判断平年和闰年
+                        calendar.set(scanner.nextInt(),2,1);
+
+                field:代表的是日历字段(可以是: 年,月,日,时,分,秒,周[均是静态字段])该字段是静态的可以直接类名调用

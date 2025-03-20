@@ -1,0 +1,27 @@
+函数式接口:
+    有且只有一个抽象方法的接口
+  检查方法:
+    @FunctionalInterface
+
+   java提供的四个接口单独使用都不会好用
+java提供的函数式接口(四个):
+    1:Supplier接口
+        供给型接口-->想要什么就给什么
+        方法:
+            get(抽象方法)
+
+    2:Consumer接口
+        消费型接口(消费指操作数据)
+        方法:
+            void accept(T t)
+            怎么消费却决于如何重写accept方法
+
+    3:Function接口
+        Function<T,R>;类型转换型接口
+        方法:
+            R apply(T t)根据类型T参数获取类型R的结果(类型转换)
+
+    4:Predicate接口
+        判断型接口
+            方法:
+                Boolean test(T t)->用于判断方法返回值为Boolean型

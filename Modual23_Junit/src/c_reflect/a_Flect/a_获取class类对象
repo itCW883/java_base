@@ -1,0 +1,26 @@
+获取class对象:
+    (多用于对象获取字节码方式)
+    方式1:调用Object中的getClass方法
+        class<?> getClass()
+    通过对象的方法
+        返回此 Object的运行时类。
+        对象.getClass
+
+    方式2:无论基本类型还是引用类型;jvm虚拟机都为它们提供了一个静态成员:class
+    (多用于参数传递)
+            类名.class
+    类已被加载入内存
+
+    方式3:Class类中的静态方法:
+    (多用于配置文件;可以将类名定义在配置文件中,读取文件(properties文件),加载类)
+        static Class<?> forName(String className)
+    将字节码文件加载入内存
+        返回与给定字符串名称的类或接口相关联的 类对象。
+            参数传入的是:(className)类的全限定名(包名.类名)
+        static Class<?> forName(String name, boolean initialize, ClassLoader loader)
+        使用给定的类加载器返回与给定字符串名称的类或接口相关联的 类对象。
+    使用格式:
+    Class.forName(类的全限定名)
+
+
+    同一个字节码文件在一个程序的运行过程中只会加载一次,无论通过那种方式获取的class对象都是同一个

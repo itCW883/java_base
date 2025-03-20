@@ -1,0 +1,42 @@
+解析class对象:
+    1:获取Class对象的构造方法:
+        ①:获取所有public的构造方法
+            Class类中的方法
+            Constructor<?>[] getConstructors()
+            可以获取所有public的构造;也可以反射私有构造
+            返回包含一个数组 Constructor对象反射由此表示的类的所有公共构造 类对象。
+                例子:
+                 //1:获取class对象
+                        Class<a_Person> aClass = a_Person.class;
+                        //2:获取所有public的构造方法
+                        Constructor<?>[] aClassConstructors = aClass.getConstructors();
+                        for (Constructor<?> aClassConstructor : aClassConstructors) {
+                            System.out.println(aClassConstructor);
+                        }
+        利用空参构造实例化对象快捷方式:
+            Class中的方法:
+                T newInstance() //根据空参构造实例化对象
+                前提:被反射的类中必须有public的空参构造
+
+
+        ②:获取指定的构造:
+                Class类中的方法
+                    Constructor<T> getConstructor(类<?>... parameterTypes)
+                    获取指定的Public的构造
+                            参数:parameterTypes 可变参数;可以传递0个或多个参数
+                                注意:若获取的是空参构造参数可不写
+                                     若获取的是有参构造:参数写参数类型的Class对象
+                    返回一个 Constructor对象，该对象反映 Constructor对象表示的类的指定的公共 类函数。
+
+        ③:正常情况下外部的类是无法使用类的私有构造的;
+         但是通过反射的方法可以可以使用私有构造实例化对象
+                Class类中的方法
+                    Constructor<?>[] getDeclaredConstructors()
+                    获取所有构造方法;包括private修饰的构造方法
+                    返回一个反映 Constructor对象表示的类声明的所有 Constructor对象的数组 类 。
+
+                    Constructor<T> getDeclaredConstructor(类<?>... parameterTypes)
+                    获取指定构造;包含private和其它的构造方法
+                        parameterTypes参数类型的class对象
+                    返回一个 Constructor对象，该对象反映 Constructor对象表示的类或接口的指定 类函数。
+

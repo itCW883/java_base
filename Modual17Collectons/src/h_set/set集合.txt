@@ -1,0 +1,55 @@
+set集合:(set的元素2是放在map的key位置的;key是唯一的;所以导致set的元素也是唯一的)
+    set接口并没有对collection接口进行功能扩展;而且set的所有底层都是依靠Map实现
+    set和Map是1密切相关的
+    map的遍历需要先变为单列集合;且只能变为set集合
+
+实现类:
+    HashSet:
+        特点:
+            1:元素唯一
+            2:元素无序;存取顺序不一致
+            3:五索引;且无更根据索引操作数据的方法
+            4:线程不安全
+        数据结构:
+            Hash表结构
+            1:jdk8之前hash表结构为:数组加链表(单向链表)
+            2:jdk8之后hash表结构为:数组加链表加红黑树;加入红黑树提高查询效率
+        方法:和collection相同
+        遍历:1:增强for;2:迭代器(不能使用普通for循环因为HashSet无索引也无操作索引的方法)
+
+        例子:
+            public class a_HashSetDemo01 {
+                public static void main(String[] args) {
+                    HashSet<String> set= new HashSet<>();
+                    set.add("马哥");
+                    set.add("瘦皮猴");
+                    set.add("黑娃");
+                    set.add("马哥");
+                    set.add("开罗");
+                    set.add("李燕");
+
+                    System.out.println(set);//[黑娃, 瘦皮猴, 马哥, 开罗, 李燕]存取顺序不一致;每次取数据还是一样的
+                                            // 且会自动去重;会删除重复的数据,只保留一个
+
+                    Iterator<String> iterator = set.iterator();
+                    while (iterator.hasNext()){
+                        System.out.printf(iterator.next()+" ## ");
+                    }
+                    System.out.println();
+                    System.out.println("==================");
+                    for (String s : set) {
+                        System.out.printf(s+" $$ ");
+                    }
+
+                }
+            }
+
+HashSet的子类:
+    LinkedHashSet:继承于HashSet
+        特点:
+            1:元素唯一
+            2:元素有序
+            3:线程不安全
+        数据结构:
+            Hash表加双向链表
+        使用:与HashSet相同

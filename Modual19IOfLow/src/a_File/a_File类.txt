@@ -1,0 +1,55 @@
+File类:
+    概述:文件和目录(目录)路径名的抽象表示。
+         在创建File对象时,需要传递一个路径;这个路径定位到哪个文件或文件夹上,我们的file就代表哪个对象
+
+File的使用:
+
+                   //public static final String pathSeparator
+                   //一个路径与其他路径间的分隔符
+                   // 与系统相关的路径分隔符字符，为方便起见，表示为字符串。 此字符串包含单个字符，即pathSeparatorChar 。
+                   String pathSeparator = File.pathSeparator;
+
+
+                   //    public static final String separator
+                   //路径里文件或文件夹间的分隔符
+                   //    与系统相关的默认名称分隔符 - 分隔符字符，以方便的方式表示为字符串。 该字符串包含一个字符，即separatorChar 。
+                   //不同操作系统间的路径分隔符号不相同;写路径时尽量不适应//
+                   //写路径时把//替换为Separator;这样会自动获取路径名称分隔符
+                   String separator = File.separator;
+                   String PATH = "E"+File.separator+"Idea"+File.separator+"Io";
+
+                   System.out.println(pathSeparator);
+                   System.out.println(separator);
+
+File的构造方法:
+           //public File(String parent,String child)
+            //    //从父路径名字符串和子路径名字符串创建新的File实例。
+            //      参数
+            //      parent - 父路径名字符串
+            //      child - 子路径名字符串
+            //      异常
+            //      NullPointerException - 如果 child是 null
+            File file1 = new File("D:\\短发睡姿", "李锐个人简历(1).pdf");//子路径只要是一个路径就行;不一定需要是某一个具体的文件
+            System.out.println(file1);
+
+
+            //    //public File(File parent,String child)
+            //      参数
+            //      parent - 父抽象路径名
+            //      child - 子路径名字符串
+            //      异常
+            //      NullPointerException - 如果 child是 null
+            File parent = new File("D:\\短发睡姿");
+            File file2 = new File(parent, "李锐个人简历(1).pdf");
+            System.out.println(file2);
+
+
+            //    //public File(String pathname)
+            //          参数
+            //          pathname - 路径名字符串
+            //          异常
+            //          NullPointerException - 如果 pathname参数是 null
+            File file3 = new File("D:\\短发睡姿\\李锐个人简历(1).pdf");
+            System.out.println(file3);
+
+            //创建File对象时;传入的路径是可以在本地不存在的路径;但是传递不存在的路径无意义

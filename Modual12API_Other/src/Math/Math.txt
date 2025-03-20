@@ -1,0 +1,29 @@
+Math:数学相关类
+    作用:主要用于数学运算
+    特点:(工具类特点)
+        1:构造方法私有化:不能new对象
+        2:方法都是静态的
+    使用:
+        类名.方法名();
+
+Math的方法:
+          //Static int abs(int a) -->求参数的绝对值
+          System.out.println(Math.abs(-6));
+
+          //Static double cell(double a) -->向上取整
+          System.out.println(Math.ceil(0.1));
+
+          //Static double floor(double a) -->向下取整
+          System.out.println(Math.floor(0.9));
+
+          //Static long round(double a) -->四舍五入
+          System.out.println(Math.round(-4.123459));
+
+          //Static int max(int a,int b) -->求两个数之间的较大值
+          System.out.println(Math.max(111, 222));
+
+          //Static int min(int a,int b) -->求两个数之间的较小值
+          System.out.println(Math.min(111, 222));
+
+
+BigDecimal和BigIntefer不能直接写在main函数中

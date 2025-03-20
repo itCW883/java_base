@@ -1,0 +1,42 @@
+迭代器的原理:
+    创建实现类对象:
+    Iterator<String> it1 = arr1.iterator();
+    Iterator接收的是哪个实现类对象?
+        是ArrayList中的内部类的Itr[只针对迭代ArrayList;其他集合不一定是这个对象了]对象
+                Itr是ArrayList集合的内部类
+                  [ public Iterator<E> iterator() {
+                        return new Itr();
+                    }
+                    private class Itr implements Iterator<E>{...}]
+        注意:只有ArrayList使用迭代器的时候iterator接口才会指向Itr,其他的的集合使用迭代器iterator时指向的不是Itr
+
+
+
+并非修改异常:
+    public static void main(String[] args) {
+            ArrayList<String> strings = new ArrayList<>();
+            strings.add("唐僧");
+            strings.add("孙悟空");
+            strings.add("猪八戒");
+            strings.add("沙僧");
+
+            Iterator<String> iterator = strings.iterator();
+            while(iterator.hasNext()){
+                String next = iterator.next();
+                if ("猪八戒".equals(next))//"猪八戒".equals(next)可以防止空指针问题
+                {
+                    strings.add("白龙马");此处产生了并发修改异常(掉用add方法只给实际操作次数加1,没有给预期操作次数也加1,后面调用next方法就会并发修改异常)
+                    //ConcurrentModificationException并非修改异常
+                    //导致异常的方法checkForComodification和方法next
+                    //调用了add方法导致modCount++(实际操作次数),
+                    //在次调用next方法时并没有给expectedModCount(预期操着次数)重新赋值
+                    //此时modCount和expectedModCount不再相等,因此导致了并发修改异常
+                }
+            }
+            System.out.println(strings);
+        }
+解决办法:
+    ListIterator<E> listIterator()
+    返回列表中的列表迭代器（按适当的顺序）。
+
+使用迭代器和增强for循环时,迭代集合的过程中,尽量不要改变集合的长度,[尤其是在迭代过程中]

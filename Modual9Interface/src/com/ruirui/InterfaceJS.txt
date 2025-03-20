@@ -1,0 +1,33 @@
+package com.ruirui;
+
+public class InterfaceJS {
+/*
+* 接口关键字:interface
+* 接口定义:public interface 接口名{}
+* 接口实现(需要实现类)
+*       关键字:implements
+* 实现类:权限修饰符 class 类名 implements 接口名{}
+*
+* 接口可以定义的成员
+*       1:(jdk7及以前)
+*         抽象方法(接口中定义抽象方法即使不带public abstract也会默认自带)
+*         成员变量[被public static final修饰,默认也会自带,被final修饰的变量不能二次赋值,一般被final修饰的变量视为常量]
+*       2:jdk8
+*         默认方法:public default 返回值类型 方法名(形参){}默认方法是可以实现的[default只有在接口中才可以使用此关键字]
+*         静态方法:public static 返回值类型 方法名(形参){}[使用:直接接口名.静态方法名]
+*       3:jdk9后
+*         私有方法:private(使用并不多)
+*
+*
+*
+* 接口使用:
+*   1:定义接口:public interface 接口名{}
+*   2:实现:public class 实现类类名 implements 接口名{}
+*   3:使用:
+*       ①:实现类类(类似与抽象类的子类)实现接口
+*       ②:重写接口中的抽象方法
+*       ③:创建实现类对象(接口和抽象类一样不可以直接new对象)
+*       ④:调用重写的方法
+* */
+
+}

@@ -1,0 +1,30 @@
+匿名内部类创建多线程(属于实现Runnable接口的方式):
+        new Thread(new Runnable){
+            重写run()方法
+             @Override
+             public void run() {
+                    方法体
+                 }
+                                }
+        }.start()
+
+        Thread td = new Thread(new ICThread(){
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < 10; i++) {
+                            System.out.println(Thread.currentThread().getName() + "线程执行的第" + i + "次");
+                        }
+                    }
+                });
+
+
+
+        new Thread(new ICThread(){
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < 10; i++) {
+                            System.out.println(Thread.currentThread().getName() + "线程执行的第" + i + "次");
+                        }
+                    }
+                },"哼哼哼").start();
+                //匿名内部类创建的多线程可以直接在创建匿名对象的时候就继续线程命名

@@ -1,0 +1,36 @@
+设置对应的日期字段:(适用于LocalDate和LocalDateTime)[with开头]
+             LocalDate local1 = LocalDate.now();
+        LocalDate local1 = LocalDate.now();
+    **注意:LocalDate和LocalDateTime是一个不可变的对象,使用with设置LocalDate和LocalDateTime的相应属性实际上是会产生一个新的对象
+            //LocalDate with(TemporalAdjuster adjuster)
+            //返回此日期的调整副本。
+            //LocalDate with(TemporalField field, long newValue)
+            //返回此日期的副本，并将指定的字段设置为新值。
+            //LocalDate withDayOfMonth(int dayOfMonth)
+            //返回此日期的副本，并更改日期。
+                    LocalDate l3 = local1.withDayOfMonth(30);
+                    System.out.println("l3.getDayOfMonth() = " + l3.getDayOfMonth());
+
+            //LocalDate withDayOfYear(int dayOfYear)
+            //返回此日期的副本，并更改日期。
+                    LocalDate l2 = local1.withDayOfYear(365);
+                    System.out.println("l2.getYear() = " + l2.getDayOfYear());
+
+            //LocalDate withMonth(int month)
+            //返回这个日期的副本，并更改年月日。
+                    LocalDate l1 = local1.withMonth(8);
+                    System.out.println("l1.getMonthValue() = " + l1.getMonthValue());
+                    System.out.println("l1 = " + l1);
+                    System.out.println("local1 = " + local1);
+
+            //LocalDate withYear(int year)
+            //返回此日期的副本，并更改年份。
+                    LocalDate l4 = local1.withYear(2026);
+                    System.out.println("l4.getYear() = " + l4.getYear());
+
+            使用with设置属性实际上是产生新对象,且一次只能设置一个属性所以需要递进设置
+                 LocalDate l1 = local1.withYear(2026);
+                 LocalDate l2 = l1.withMonth(8);
+                 LocalDate l3 = l2.withDayOfMonth(30);
+            或者使用链式调用:
+            LocalDate local = localDate1.withYear(2026).withMonth(11).withDayOfMonth(29);

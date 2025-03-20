@@ -1,0 +1,84 @@
+File类中的常用方法:
+    文件的获取方法:
+           //String getAbsolutePath()
+           //获取File的绝对路径(带盘符的路径)名字符串。
+           File file1 = new File("1.txt");//当前项目下
+           System.out.println(file1.getAbsolutePath());
+
+           //String getPath()
+           //获取封装路径(实例化file对象时传什么路径就获取什么路径);并非相对路径
+           System.out.println(file1.getPath());
+
+           //String getName()
+           //获取文件或目录的名称。
+           //获取路径最后的那个部分
+           File file2 = new File("D:\\短发睡姿\\李锐个人简历(1).pdf");
+           System.out.println(file2.getName());
+
+           //long length()
+           //返回由此抽象路径名表示的文件的长度。
+           //获取文件的长度指的是字节数
+           System.out.println("file2.length() = " + file2.length());
+           System.out.println("file1.length() = " + file1.length());
+
+    文件的创建方法:
+           //boolean createNewFile()
+                   //当且仅当具有该名称的文件尚不存在时，原子地创建一个由该抽象路径名命名的新的空文件。
+                   //创建文件;返回值类型是boolea指的是创建的文件如果之前有就会创建失败就会返回false;否则返回true创建成功
+                   File file2 = new File("D:\\短发睡姿\\1.txt");
+                   boolean newFile1 = file2.createNewFile();
+                   System.out.println("newFile1 = " + newFile1);
+
+                   //boolean mkdirs()
+                   //创建由此抽象路径名命名的目录，包括任何必需但不存在的父目录。
+                   //创建文件夹;既可以创建单级文件夹;也可以创建多级文件夹
+                   //如果要创建的文件夹之前有就会创建失败返回false;否则返回true创建成功
+                   File file1 = new File("D:\\短发睡姿\\嗨嗨嗨\\哼哼哼\\啦啦啦\\六六六");
+                   boolean mkdirs = file1.mkdirs();
+                   System.out.println("mkdirs = " + mkdirs);
+
+
+
+File类的删除方法:
+           //boolean delete()
+           //删除由此抽象路径名表示的文件或目录。
+           //这个方法是彻底删除;不会进入回收站
+           //如果删除文件夹必须是空文件夹
+           File file1 = new File("D:\\短发睡姿\\嗨嗨嗨\\哼哼哼\\啦啦啦\\六六六");
+           boolean delete = file1.delete();
+           System.out.println(delete);
+
+File类的判断方法:
+       boolean directory = file1.isDirectory();
+       System.out.println("directory = " + directory);
+
+       //boolean isFile()
+       //测试此抽象路径名表示的文件是否为普通文件。
+       System.out.println("file1.isFile() = " + file1.isFile());
+
+       //boolean exists()
+       //测试此抽象路径名表示的文件或目录是否存在。
+       System.out.println("file1.exists() = " + file1.exists());
+
+
+File类的遍历方法:(这两个方法只遍历了一级文件夹)
+        boolean newFile = file2.createNewFile();
+        //String[] list()
+        //返回一个字符串数组，命名由此抽象路径名表示的目录中的文件和目录。
+        //返回的是一个字符串数组;
+        // 对这个字符串进行遍历时输出的是调用这个方法的File对象的最后一级目录包含的所有文件;并非是一条路径
+        String[] bac1 = file1.list();//返回的是一个字符串数组;
+                                     // 对这个字符串进行遍历时输出的是调用这个方法的File对象的最后一级目录包含的所有文件;并非是一条路径
+        for (int i = 0; i < bac1.length; i++) {
+            System.out.println("bac1[i] = " + bac1[i]);//1.txt
+                                                       //2.txt
+        }
+        //File[] listFiles()
+        //方法底层仍然是调用的list
+        //返回一个抽象路径名数组，表示由该抽象路径名表示的目录中的文件。
+        //遍历会得到File对象的最后一级里面包含所有的文件的多条绝对路径
+        File[] bac2 = file1.listFiles();
+        for (File file : bac2) {
+            System.out.println(file);//D:\短发睡姿\嗨嗨嗨\哼哼哼\啦啦啦\六六六\1.txt
+                                     //D:\短发睡姿\嗨嗨嗨\哼哼哼\啦啦啦\六六六\2.txt
+            }

@@ -1,0 +1,69 @@
+问题:前三个创建线程的方法,每次开启一格线程就需要创建一个线程对象,线程结束就需要删除线程对象,太消耗内存,且占用太多资源
+
+线程池:(解决线程的频繁创建销毁,占用内存空间问题)
+      1:创建线程池对象,指定线程池中最多能有多少线程对象
+      2:来线程任务①后;观察线程池中是否有线程对象,如果没有就需要创建线程对象,分配给这个观察的线程任务,使用完后还回线程对象
+      3:来新线程任务②后;观察线程池中是否有线程对象,若有创建好的线程对象,直接使用;如果没有就需要创建线程对象,分配给这个观察的线程任务,使用完后还回线程对象
+      4:假设指定线程池中最多能有两个线程对象;来新线程任务③后;观察线程池中是否有线程对象,若有创建好的线程对象,直接使用;
+                如果没有就需要等待之前的线程任务使用完毕归还线程对象;才能拿到线程对象进行使用;使用完毕后归还线程对象
+
+线程池的使用:
+    1:创建线程池对象
+        使用工具类Executors创建线程池对象
+    2:获取线程池对象
+        使用工具类Executors中的static ExecutorService newFixedThreadPool(int nThreads)方法
+                            ①参数指定线程池中最多创建的线程对象条数
+                            ②返回值ExecutorService用于管理线程对象
+                        创建一个线程池，该线程池重用固定数量的从共享无界队列中运行的线程。
+    3:提交线程任务执行线程任务
+        使用ExecutorService中的方法
+                         <T> Future<T> submit(Callable<T> task)提交一个Callable<T>的任务拥有执行
+                                 参数类型
+                                 T - 任务结果的类型
+                                 参数
+                                 task - 提交的任务
+                                 结果
+                                 一个未来的代表，待完成任务
+                         <T> Future<T> submit(Runnable task,T result)提交一个Runnable的任务拥有执行
+                                参数类型
+                                T - 结果的类型
+                                参数
+                                task - 要提交的任务
+                                result - 结果返回
+                                结果
+                                一个未来的代表，待完成任务
+    4:submit方法的返回值为Future<T>;Future<T>用于接收run(返回值为void因此可以不用Future<T>接收,即使接收也是null)方法或者call方法的返回值
+    5;future(接口)中:  get方法用于获取call方法和run方法的返回值
+           V get()
+           等待计算完成，然后检索其结果。
+           V get(long timeout, TimeUnit unit)
+           如果需要等待最多在给定的时间计算完成，然后检索其结果（如果可用）。
+    6:使用ExecutorService中的shutdown()方法(关闭线程):
+            void shutdown()
+            启动有序关闭，其中先前提交的任务将被执行，但不会接受任何新任务
+
+
+ Runnable:
+     //1:创建线程池对象
+     ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+     //2:submit提交多个现场任务
+     executorService.submit(new MyRunnable());
+     executorService.submit(new MyRunnable());
+     executorService.submit(new MyRunnable());
+
+     //3:关闭线程池对象
+     executorService.shutdown();//不关闭线程池程序会一直等待线程任务的到来
+
+ Callable:
+      //1:创建线程池对象
+     ExecutorService exec = Executors.newFixedThreadPool(2);
+
+     //2:submit提交多个现场任务
+     Future<String> sb1 = exec.submit(new MyCallable());//call方法有返回值需要用Future进行接收
+
+     //3:Future的get方法接收返回值
+                 System.out.println(sb1.get());
+
+     //4:关闭线程池对象
+     exec.shutdown();

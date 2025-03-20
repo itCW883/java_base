@@ -1,0 +1,72 @@
+泛型的通配符(?):
+public class a_Demo01 {
+    public static <meth> void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("mag");
+        list.add("sph");
+        list.add("heiwa");
+        ArrayList<Integer> list2 = new ArrayList<>();
+        list2.add(1234);
+        list2.add(234546);
+        methoud(list);
+        methoud(list2);
+    }
+
+    private static void methoud(ArrayList<?> list) {
+        //?就代表泛型通配符
+        for (Object o : list) {
+            System.out.println(o);
+        }
+    }
+}
+
+
+泛型通配符的高级使用:
+    泛型的上限和下线:可以用于规定泛型的范围(泛型的范围就是指子父类)
+        上限:
+            格式: <? extends 类型>
+            含义:?只能接收extends 后面的本类和子类类型
+
+        下线:
+            格式:<? super 类型>
+            含义:?只能接收super 后面的本类和父类类型
+
+泛型通配符的应用场景:
+        ①若在定义类,方法或接口时类型不确定,可以考虑定义含有泛型的方法,类和接口
+        ②若类型不确定,但是能知道以后只能传递某个类的继承体系中的子类或父类时;就可以使用泛型通配符
+
+
+        public static void main(String[] args) {
+            ArrayList<Integer> list1 = new ArrayList<>();
+            ArrayList<String> list2 = new ArrayList<>();
+            ArrayList<Number> list3 = new ArrayList<>();
+            ArrayList<Object> list4 = new ArrayList<>();
+            /*
+            四个类的子父类继承关系
+            * Intege-->Number-->Object
+              String-->Object
+            * */
+
+            get1(list1);
+            get1(list2);//list2的数据类型是(String)不是number类型和其子类类型
+            get1(list3);
+            get1(list4);//list4的数据类型是(Object)不是number类型和其子类类型
+
+            System.out.println("============================");
+
+            get2(list1);//list1的数据类型是(Integer)不是number类型和其父类类型
+            get2(list2);//list2的数据类型是(String)不是number类型和其父类类型
+            get2(list3);
+            get2(list4);
+        }
+        public static void get1(Collection<? extends Number> collection){
+            //?接收的书局类型只能是number类和其子类的数据类型
+
+
+        }
+
+        public static void get2(Collection<? super Number> collection){
+            //?接收的书局类型只能是number类和其父类的数据类型
+
+        }
+    }

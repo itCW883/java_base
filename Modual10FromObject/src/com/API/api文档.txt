@@ -1,0 +1,20 @@
+API [Application Programming Interface]
+    应用编程接口(定义出的类/接口/方法及其中的成员)
+
+API文档的作用:查询定义出的要使用的对象和方法 的功能
+
+
+异常:(代码出现了不正常的现象)
+    throwable[异常和错误的父类]
+
+            error[错误](代码需要重大调整)
+
+            exception[异常](所有异常的父类;)
+                        exception和其子类(除runtimeexception)可代表编译时异常
+                runtimeexception[运行时异常;也是exception的子类]
+
+
+
+
+
+

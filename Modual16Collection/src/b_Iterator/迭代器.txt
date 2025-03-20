@@ -1,0 +1,34 @@
+迭代器[需要用到Iterator接口]:
+    主要作用:遍历集合
+
+    创建对象
+        需要使用collection中的方法:
+        Iterator<E> iterator()
+        返回值也是iterator
+        返回此集合中的元素的迭代器。
+            Iterator中的方法:
+                boolean hasNext() //判断集合中是否有下一个元素,如果有就获取
+                如果迭代具有更多元素，则返回 true 。
+
+                E next()//获取下一个元素
+                返回迭代中的下一个元素。
+
+        例:
+        ArrayList<String> arr1 = new ArrayList<>();
+                arr1.add("哼哼哼");
+                arr1.add("哈哈哈");
+                arr1.add("嘿嘿嘿");
+                arr1.add("嗨嗨嗨");
+                arr1.add("呼呼呼");
+                //获取迭代器对象
+                Iterator<String> it1 = arr1.iterator();
+
+                while (it1.hasNext())//循环判断是否还有下一个元素
+                {
+                    String it2 = it1.next();//获取元素
+                    //next方法在获取时尽量不要连续使用多次
+                    //连续多次使用可能会出现没有可操作元素异常(奇数个数元素时)NoSuchElementException
+
+                    System.out.println(it2);
+
+                }

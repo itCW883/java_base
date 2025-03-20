@@ -1,0 +1,30 @@
+利用反射实例化对象:
+    需要使用Constructor中的方法:
+        T newInstance(Object...initargs)
+            initargs:传递的是构造方法的实参
+            有参数的原因是返回的可能是有参构造;相当于用有参构造实例化对象
+
+        利用空参构造实例化对象快捷方式:
+            Class中的方法:
+                T newInstance() //根据空参构造实例化对象
+                前提:被反射的类中必须有public的空参构造
+
+   正常情况下外部的类是无法使用类的私有构造的;
+            但是通过反射的方法可以可以使用私有构造实例化对象
+                   Class类中的方法
+                       Constructor<?>[] getDeclaredConstructors()
+                       获取所有构造方法;包括private修饰的构造方法
+                       返回一个反映 Constructor对象表示的类声明的所有 Constructor对象的数组 类 。
+
+                       Constructor<T> getDeclaredConstructor(类<?>... parameterTypes)
+                       获取指定构造;包含private和其它的构造方法
+                           parameterTypes参数类型的class对象
+                       返回一个 Constructor对象，该对象反映 Constructor对象表示的类或接口的指定 类函数。
+
+private构造使用反射实例化对象(暴力反射):
+    Constructor有父类  AccessibleObject
+        AccessibleObject有方法:
+            void setAccessible(boolean flag)
+            该方法可以修改访问权限
+                flag=true   为解除私有权限
+            将此对象的 accessible标志设置为指示的布尔值。

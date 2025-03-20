@@ -1,0 +1,10 @@
+FileUtils类:
+    静态方法 :FileUtils.copyDirectoryToDirectory(File src,File dest);
+            传递File类型的目录文件,进行整个目录的复制,自动进行遍历
+            参数:
+                src:药复制的文件夹路径
+                dest:要将文件粘贴到哪里去
+    静态方法: writeStringToFile(File file,String str)
+            将字符串写到文本文件中
+    静态方法: String readStringToFile(File file,String str)
+            读取文本文件返回字符串

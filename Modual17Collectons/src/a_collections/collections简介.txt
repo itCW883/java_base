@@ -1,0 +1,66 @@
+Collections(集合工具类):
+    特点:1.构造私有
+        2.方法均是静态的
+    使用:类名.方法名()
+
+    常用方法:(sort重点;1:默认排序2;使用匿名对象,3:实现comparable接口在类中指定排序规则)
+        ArrayList<String> strings = new ArrayList<>();
+                //static <T> boolean addAll(Collection<? super T> c, T... elements)
+                //参数1为接口类型(传入时传实现类对象);参数2为可变参(批量添加元素)
+                //将所有指定的元素添加到指定的集合。
+                Collections.addAll(strings,"马哥","瘦皮猴","黑娃","蔡国庆","罗星");
+                System.out.println(strings);
+
+                //static void shuffle(List<?> list)
+                //使用默认的随机源随机排列指定的列表。
+                //将集合中元素顺序打乱
+                Collections.shuffle(strings);
+                System.out.println(strings);
+
+                //static <T extends Comparable<? super T>>
+                //void sort(List<T> list)
+                //根据其元素的natural ordering对指定的列表进行排序。
+                //按默认规则排序(Ascall码表)排序
+
+                ArrayList<String> list = new ArrayList<>();
+                Collections.addAll(list,"a","q","e","w","0","2","5");
+                System.out.println(list);
+                Collections.sort(list);//按首字母ascall码排;如果第一个相同则按第二个;依次类推
+                System.out.println(list);
+
+                //static <T> void sort(List<T> list, Comparator<? super T> c)
+                //根据指定的比较器引起的顺序对指定的列表进行排序。
+                //按指定规则去排序
+                //Comparator<? super T>比较器
+                    //方法返回值为int类型: int compare(T o1,To2)
+                                        //o1-o2--->升序
+                                        //o2-01--->降序
+
+                Collections.sort(bPeople, new Comparator<b_Person>() {
+                            @Override
+                            public int compare(b_Person o1, b_Person o2) {
+                                return o1.getAge()- o2.getAge();
+                            }
+                        });
+                        System.out.println(bPeople);
+
+
+                        //通过compare接口实现
+                        //方法compareTo(T o)--->this-o升序
+                        //-->0-this降序
+
+                ArrayList<Stusent> stusents = new ArrayList<>();
+                        stusents.add(new Stusent("mag",20,"三年级",100));
+                        stusents.add(new Stusent("蔡国庆",22,"三年级",88));
+                        stusents.add(new Stusent("瘦皮猴",66,"三年级",99));
+                        //此时直接使用sort方法就不会报错啦,因为在Stsent类中实现类comparable接口,已经指定了排序规则
+                        Collections.sort(stusents);
+                        System.out.println(stusents);
+
+
+    Arrsys中的静态方法:
+            static <T> list<T> asList(T...a)//传入的参数为可变参
+            作用:直接指定元素转存到list集合中
+      例:
+        List<String> list = Arrays.asList("马哥", "瘦皮猴", "黑娃");
+        System.out.println(list);

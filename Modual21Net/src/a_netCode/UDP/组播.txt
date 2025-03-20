@@ -1,0 +1,43 @@
+UDP协议编程:
+两个相关对象:
+    DatagramSocket:类似于寄快递时选择快递公式
+    DatagramPacket:类似快递公司打包快递
+组播:
+发送端(客户端):
+          1:创建 multicastSocket
+                  注意:①空参构造:端口号会从可用端口号中随机选取一个使用;
+                      ②有参构造:需要自己指定端口号
+            MulticastSocket multicastSocket = new MulticastSocket();
+
+          2:创建DatagramPacket对象;将数据进行打包
+                    String s1 = "我是一个组播程序";
+                    byte[] data =s1.getBytes();
+                    InetAddress addresses = InetAddress.getByName("224.0.0.1");
+                    int port=1010;
+        DatagramPacket dp = new DatagramPacket(data, data.length, addresses, port);
+
+          3:发送数据
+            multicastSocket.send(dp);
+          4:手动关闭Socket的对象释放资源
+            multicastSocket.close();
+
+接收端(服务端):
+        1:实例化组播对象
+        MulticastSocket ms = new MulticastSocket(1010);
+        2:将本机添加到组播地址中
+            InetAddress mydress = InetAddress.getByName("224.0.0.1");//组播添加的组播地址必需要是一样的
+        ms.joinGroup(mydress);
+        System.out.println("在客户端发送数据前我会一直停在这里哦!!!");
+        3:接收数据
+            byte[] bytes = new byte[1024];
+            DatagramPacket dp = new DatagramPacket(bytes, bytes.length);
+        ms.receive(dp);
+        4:解析数据
+        byte[] data = dp.getData();
+        int len = dp.getLength();
+        String result = new String(data,0,len);
+        int port = dp.getPort();
+        InetAddress address = dp.getAddress();
+            System.out.println("地址为"+address+";端口号为"+port+"的主机;通过组播模式发送的数据是"+result);
+        5:关闭对象
+        ms.close();

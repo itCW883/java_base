@@ -1,0 +1,32 @@
+properties属性集合(可以和IO流结合使用):
+    概述:
+        继承于hashtable:
+    特点:
+        1:key唯一
+        2:value可重复
+        3:元素无序
+        4:无索引
+        5:线程安全
+        6:不能存null键null值
+        7:实力化时无需指明元素类型;因为该集合的key和value默认为string类型
+        8:数据类型为hash表
+    用法:
+        和hashmap类似
+
+    Object setProperty(String key, String value)
+    存入键值对
+    致电 Hashtable方法 put 。
+
+
+    String getProperty(String key)
+    通过key获取元素
+    使用此属性列表中指定的键搜索属性。
+
+    Set<String> stringPropertyNames()
+    获取所有key保存到set集合中
+    返回此属性列表中的一组键，其中键及其对应的值为字符串，包括默认属性列表中的不同键，如果尚未从主属性列表中找到相同名称的键。
+
+
+    void load(InputStream inStream)
+    将流中的数据加载到properties集合中
+    从输入字节流读取属性列表（键和元素对）。

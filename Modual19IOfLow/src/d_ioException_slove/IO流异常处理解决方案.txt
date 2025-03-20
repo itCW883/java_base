@@ -1,0 +1,40 @@
+IO流异常处理解决方案:
+    IO流一旦出现异常应该使用try...catch进行解决
+
+JDK7之前的异常处理方式:
+    FileWriter fw1 = null;
+    //如果实例化的FileWriter对象不为null该对象才被实例化成功了;这个FileWriter类的实例化对象才需要关闭
+    if (fw1 != null){
+        try {
+            fw1 =new FileWriter("Modual19IOfLoor\\src\\b_ByteFloor\\a_3.txt");
+            fw1.write("你好\n");
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                fw1.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+JDK7之后的异常处理方式:
+    try(IO对象){
+    可能出现异常的代码
+    }
+    catch(Exception e){
+    处理异常
+    }
+注意:
+    这种方法处理异常流对象会自动关闭;不需要close()方法手动关闭流对象
+例:
+     try (FileWriter fw1 = new FileWriter("Modual19IOfLoor\\src\\b_ByteFloor\\a_3.txt");){
+                fw1.write("瘦皮猴大帅B\n");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }

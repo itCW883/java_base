@@ -1,0 +1,71 @@
+解决线程安全问题的方法:
+      1:同步代码块(关键字:synchronied)
+            格式:synchronied(任意对象[这里面的对象就代表锁对象]){
+            线程可能出现不安全的代码
+            }
+            任意对象就是锁对象
+            一个线程拿到锁后,就会进入同步代码块执行,在此期间,其他线程拿不到这个锁,
+            其他线程需在同步代码块外排队,直到在同步代码块中的线程释放这个锁,等待的线程才能抢到锁
+
+        例:
+         //任意new一个对象,任何对象都可以
+            Object ob=new Object();
+            @Override
+            public void run() {
+                while (true)
+                {
+                    if(ticket>0){
+                        synchronized (ob){
+                            //可能出现线程安全问题的代码
+                            System.out.println(Thread.currentThread().getName() + "抢到第"+ticket+"张票啦");
+                            ticket-=1;
+                        }
+                    }
+
+                }
+
+      2:同步方法:
+        ①:普通同步方法(非静态同步方法):
+            格式:修饰符 synchronized 返回值类型 方法名(参数)//默认的锁是this
+            {
+            方法体[可能发生线程问题的代码]
+            return 结果
+            }
+            例1:
+                public synchronized void SamePceMethod()//非静态同步方法默认锁是this
+                    {
+                        if(ticket>0){
+                            //可能出现线程安全问题的代码
+                                System.out.println(Thread.currentThread().getName() + "抢到第"+ticket+"张票啦");
+                                ticket--;
+                        }
+                    }
+            例2:
+                   private void SamePceMethod02() {
+                        synchronized (this){
+                            System.out.println(this+"...............");
+                            if (ticket>0){
+                                //可能出现线程安全问题的代码
+                                System.out.println(Thread.currentThread().getName() + "抢到第"+ticket+"张票啦");
+                                ticket--;
+                            }
+                        }
+                    }
+        ②:静态同步方法:
+            格式:修饰符 static synchronized 返回值类型 方法名(参数)
+                    //默认的锁是Class对象
+                        {
+                        方法体[可能发生线程问题的代码]
+                        return 结果
+                        }
+                例:
+                  public static synchronized void SamePceMethod()//静态同步方法默认锁是class对象[类名.class]
+                     {
+                         if(ticket>0){
+                            //传入的参数需要是静态的
+                             //静态不能直接访问非静态 if(ticket>0)会报错只需要改变定义的成员变量为静态即可
+                             //可能出现线程安全问题的代码
+                                 System.out.println(Thread.currentThread().getName() + "抢到第"+ticket+"张票啦");
+                                 ticket--;
+                         }
+                     }

@@ -1,0 +1,65 @@
+ArrayList简介
+    ArrayList:
+            特点:
+                1,元素有序
+                2,元素可重复
+                3,带索引(用索引操做元素)
+                4,线程不安全
+                5,底层数据结构为数组
+    底层数组的初始化长度为10,需要在第一次调用add方法时才会初始化一格长度为10的空列表,存入超过10个元素就会自动扩容
+    ArrayList底层会自动扩容(集合长度可变的原因),-->原理为Arrays.copyOf;超出范围自动扩容1.5
+
+    现在使用arraylist集合(以后不常用):
+        ArrayList<String> list = new ArrayList<>();
+    后期ArrayList集合的使用方式:
+        调用一个方法查询出很多数据;此方法就返回一个集合,自动将查询出的数据放入集合中;
+        想要展示数据就进行集合的遍历
+        而且将来调用方法返回的集合一般都是接口类型
+        List<泛型> 对象名 = 对象.查询方法();//多态使用
+
+
+        常用方法:
+            ArrayList<String> list = new ArrayList<>();
+            //boolean add(E e)
+            //将指定的元素追加到此列表的末尾。
+            list.add("哈哈哈");
+            list.add("略略略");
+            list.add("123");
+            list.add("432");
+            list.add("345");
+            list.add("789");
+            System.out.println(list);
+            //void add(int index, E element)
+            //在此列表中的指定位置插入指定的元素。
+            list.add(3,"我爱java");
+            System.out.println(list);
+            //E remove(int index)
+            //删除该列表中指定位置的元素。
+            System.out.println(list.remove(0));//返回的是被删除的元素
+            System.out.println(list);
+            //boolean remove(Object o)
+            //从列表中删除指定元素的第一个出现（如果存在）。
+            System.out.println(list.remove("123"));//返回的是true/false
+            System.out.println(list);
+            //E set(int index, E element)
+            //用指定的元素替换此列表中指定位置的元素。
+            System.out.println(list.set(0, "python有点搞忘记了"));//返回的是被替换的元素
+            System.out.println(list);
+            //E get(int index)
+            //返回此列表中指定位置的元素。
+            System.out.println(list.get(0));
+            //int size()
+            //返回此列表中的元素数。
+            System.out.println(list.size());
+
+        问题:IndexOutOfBoundsException索引越界异常
+            ArrayList<Integer> list = new ArrayList<>();
+            //boolean add(E e)
+            //将指定的元素追加到此列表的末尾。
+            list.add(2);
+            //list.remove(2);
+            //若remove中直接传入整数,会默认为直接按索引位置删除元素
+            //解决办法,将传入的整数包装为包装类,变为包装类后其父类就是Object
+            // list.remove(new Integer(2));
+            list.remove(Integer.valueOf(2));
+            System.out.println(list);//IndexOutOfBoundsException索引越界异常

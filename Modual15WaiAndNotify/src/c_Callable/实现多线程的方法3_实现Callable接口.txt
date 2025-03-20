@@ -1,0 +1,45 @@
+Callable(接口)<V>:
+    类似与Runnable接口
+    方法:
+        V call()类似于run()方法:用于设置线程任务
+    call方法与run方法的同异:
+        相同点:
+            ①都是用于设置线程任务
+        不同点:
+            ①run方法无反回值,call方法有返回值
+            ②run方法没有throws异常,出现异常只能try ... catch;
+                    call方法有throws异常,出现异常可以向上throws
+       ③<V>代表泛型:用于指定操作什么类型的数据,<引用数据类型(只能是)>;泛型不写(不传入数据类型默认为object类型数据)
+       ④:实现Callable接口时:指定泛型是什么类型,重写的call方法的返回值就是什么类型
+       ⑤:获取call方法返回值用的是:FutureTask<v>类(单独的实现Callable和多线程时使用的是FutureTask<v>):
+                                        实现了接口Future<v>
+           单独的实现Callable和多线程时使用的是FutureTask<v>:
+                                          方法:v get():获取call方法的返回值
+
+
+
+实现多线程步骤:
+        1:创建Callable<>的实现类对象
+
+        2:重写v call()方法
+          public String call() throws Exception {
+                 //需要实现的线程任务的代码
+                 return "哈哈哈............嘿嘿嘿";
+             }
+
+        3:// 创建FutureTask对象
+            FutureTask的构造方法专用于传Callable的接口(实现类)
+                FutureTask<String> stringFutureTask = new FutureTask<>(myCallable);
+
+        4://创建Thread对象,传入Runnable接口:
+          // FutureTask实现了RunnableFuture接口;RunnableFuture继承了Runnable
+          //因此FutureTask输入Runnable的实现类
+          Thread thread = new Thread(stringFutureTask);
+
+        5://开启线程
+          thread.start();
+
+        6://使用get方法获取call方法返回值
+          System.out.println(stringFutureTask.get());
+
+            }

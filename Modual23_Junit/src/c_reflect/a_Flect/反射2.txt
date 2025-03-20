@@ -1,0 +1,29 @@
+三种获取class的方式最通用的方式是:
+     方式3:Class类中的静态方法
+            static Class<?> forName(String className)
+            返回与给定字符串名称的类或接口相关联的 类对象。
+        原因是参数是String;参数为String就可以和properties结合使用
+
+        public class a_getclassdemmo02 {
+            @Test
+            public void get1() throws ClassNotFoundException, IOException {
+                Properties properties = new Properties();
+                FileInputStream fis = new FileInputStream("D:\\xue\\JAVA\\Project\\project1\\Modual23_Junit\\prop.properties");
+                properties.load(fis);
+                String className = properties.getProperty("className");
+                Class<?> aClass = Class.forName(className);
+                System.out.println("aClass = " + aClass);
+            }
+        }
+        //获取对象极为通用;如果想改变获取的对象;直接修改.properties文件中的配置就可以了
+
+三种获取class的方式最常用的方式是:
+                            类名.class
+                            方便用框架创建对象
+
+
+
+方法:
+    getModifiers()
+    获取权限修饰符返回值为int
+    私有

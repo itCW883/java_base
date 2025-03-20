@@ -1,0 +1,31 @@
+Properties集合:
+唯一一个可以和IO流结合使用的集合
+
+使用场景:配合配置文件使用;将来开发时;不能将硬数据放入源码中
+    硬数据:(固定的数据;如用户名和密码(因为将来可能会修改用户名和密码;若写入源码中;这类数据改变就需要进入源码中进行修改))
+
+  创建配置文件:模块下右键-->file-->取名为xxx.properties
+             2:在xxx.properties文件中写配置数据
+                    ①:key和value都是key=value形式
+                    ②:key和value都是String数据类型,但不能加""
+                    ③:每个键值对写完需要换行再写下一个
+                    ④:键值对间最好不要有空格
+                    ⑤:键值对中建议不要使用中文(中文可以有但是直接读取会乱码;需要转换流转码)
+
+Properties extend HashTable
+    特点:
+        1:无序无索引
+        2:key唯一,value可重复
+        3:线程安全
+        4:key和value默认类型为String
+
+    方法:map中的方法均可以使用
+        特有方法:
+            setProperty(String key,String value)
+            存键值对
+            getProperty(String key)
+            根据键获取值
+            stringPropertyName()
+            获取所以key存入set集合中
+            load(InputStream in)
+            将流中的数据加载到Properties集合中

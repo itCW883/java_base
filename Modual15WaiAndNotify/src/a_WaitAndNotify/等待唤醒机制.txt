@@ -1,0 +1,44 @@
+等待唤醒机制(线程间的通信):
+    要求:一个线程生产一个线程消费且不能连续生产和连续消费(两线程交替执行)
+    wait方法:线程等待会释放锁,需要其他线程使用notify唤醒执行,唤醒后还需要抢锁
+    notify方法:一次只能唤醒一个线程,如果有多哥线程需要换醒,则随机唤醒一个线程
+    notifyAll方法:一次唤醒所有线程
+    上述方法都需要锁对象调用执行,代表着上述三个方法均在同步代码块或者同步方法中由同一个锁对象使用
+
+    示例代码:
+            private Workplace productor ;//定义一个成员变量来作为构造函数的参数
+                                         //通过构造函数来确保两个线程使用的是同一个锁对象
+
+                public Product(Workplace productor) {
+                    this.productor = productor;
+                }
+
+                @Override
+                public void run() {
+
+                    while(true){
+                        try {
+                            Thread.sleep(1000);
+
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        synchronized (productor){ //同步代码块传入锁对象productor
+                           if(productor.getTag()){//条件判断,满足条件 停止线程,释放锁对象,等待线程2的唤醒
+                               try {
+                                   productor.wait();
+                               } catch (InterruptedException e) {
+                                   throw new RuntimeException(e);
+                               }
+                           }
+                           else {
+                           //不满足条件判断,调用需要执行的方法
+                           //重置判断条件
+                           //唤醒另一个线程
+                               productor.setBaoZi();
+                               productor.setTag(true);
+                               productor.notify();
+                           }
+                        }//结束同步代码块释放锁对象,会重新和线程2抢锁,若抢到锁又会进行2次if条件判断
+                    }
+                }

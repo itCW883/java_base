@@ -1,0 +1,57 @@
+BigDecimal:
+        针对问题:
+                float和double类型做运算会出现精度损失问题,因此在一些特定情况下,就不能使用float或者double类型进行运算
+        作用:
+            解决float和double的精度损失问题
+
+       构造方法:
+                 BigDecimal(String val[传入的参数格式是数字形式的String])
+                 将BigDecimal的字符串表示 BigDecimal转换为 BigDecimal。
+            **不建议用:BigDecimal(double val)
+                    将 double转换为 BigDecimal ，这是 double的二进制浮点值的精确十进制表示。
+                如果一定要用double类型进行传参那就使用静态方法static valueOf(double),别使用构造方法
+                    BigDecimal b2 = BigDecimal.valueOf(2.12);
+
+
+        常用方法:
+                //static BigDecimal valueOf(double val) -->此方法初始化小数时可以传入double类型的数据
+                转换一个 double成 BigDecimal ，使用 double通过所提供的规范的字符串表示 Double.toString(double)方法。
+                BigDecimal b2 = BigDecimal.valueOf(2.12);
+
+                 //BigDecimal add(BigInteger val)加 返回值为 (this + val)
+                 System.out.println(b1.add(b2));
+                 //BigDecimal subtract(BigInteger val)减 返回值为 (this - val)
+                 System.out.println(b1.subtract(b2));
+                 //BigDecimal multiply(BigInteger val)乘 返回值为 (this * val)
+                 System.out.println(b1.multiply(b2));
+
+                 //BigDecimal divide(BigInteger val)除 返回值为 (this / val)
+                 System.out.println(b1.divide(b2));**如果除不尽会报异常ArithmeticException运算异常
+                 解决办法:
+                        BigDecimal divide(BigDecimal divisor, int scale, int roundingMode)
+                                BigDecimal divisor:被除数
+                                int scale:指定保留几位小数
+                                int roundingMode:取舍方式
+                                            :ROUND_UP 向上加一
+                                            :ROUND_DOWN 直接舍去
+                                            :ROUND_HALF_UP 四舍五入
+                        返回一个 BigDecimal ，其值为 (this / divisor) ，其比例为指定。
+
+
+将BigDecimal转换为 double 类型:
+                double doubleValue()
+                将此 BigDecimal转换为 double 。
+            例: BigDecimal subtract = bigDecimal2.subtract(bigDecimal1);
+               double v = subtract.doubleValue();
+       方法或成员在下方带有黄色波浪线或者被横线划掉,代表为过时的方法或成员;但是依然可以使用,被新的方法所代替了,不推荐使用
+       过时的方法或成员会带有一个注解:@Deprecated(since="9")
+
+       BigDecimal divide(BigDecimal divisor, int scale, RoundingMode roundingMode)
+                    BigDecimal divisor:被除数
+                    int scale:指定保留几位小数
+                    RoundingMode roundingMode:取舍方式-->(roundingMode是一个枚举类型里面的成员可以直接调用)
+                                :UP :向上加一
+                                :DOWN 直接舍去
+                                :HALF_DOWN 四舍五入
+
+       返回一个 BigDecimal ，其值为 (this / divisor) ，其比例为指定。

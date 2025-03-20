@@ -1,0 +1,30 @@
+HashTable和Vector集合:
+    HashTable:(Map的实现类)
+        特点:
+            1:key唯一
+            2:value可重复
+            3:无序
+            4:无索引
+            5:线程安全
+            6:不能存储null键;null值
+        数据结构:hash表结构
+
+HashTable和HashMap的异同:
+        相同点:1:元素均无序
+              2:均无索引
+              3:key唯一
+        不同点:1:HashMap线程不安全;HashTable线程安全
+              2:HashMap可以存储null键null值;HashTable不可以存储null键null值
+
+    vector:(是list的实现类)
+    特点:1:元素有序
+        2:元素有索引
+        3:元素可重复
+        4:线程安全
+    数据结构:数组
+
+    源码分析:
+        空参构造:
+            数组初始化容量为10;超出范围自动扩容2倍
+        有参构造:
+            超出初始化指定的数组范围;自动扩容;扩的是老数组的长度+指定的容量增量(非2倍)

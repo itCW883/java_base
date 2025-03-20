@@ -1,0 +1,48 @@
+基本流:FileOutStream\FileInputStream\FileReader\FileWriter
+          FileOutStream\FileInputStream读写方法均是本地方法(方法声明带native)
+                本地方法是用于和系统与硬盘打交道;对象的读和写都是在硬盘间进行的;效率不高
+
+缓冲流中带一个长度为8152的数组;这个数组即使缓冲区;读和写都是在内存中的缓冲区完成;效率高
+注意:使用前需要将基本流包装为缓冲流(实例化对象时传基本流)
+
+
+字节缓冲流:
+    BufferedOutputStream(字节缓冲输出流):
+        构造:
+            BufferedOutputStream(OutputStream out)
+            //使用和FileOutputStream相同
+            创建一个新的缓冲输出流，以将数据写入指定的底层输出流。
+
+    BufferedInputStream(字节缓冲输入流):
+            构造:
+                public BufferedInputStream(InputStream in)
+                //使用和InputStream相同
+                创建一个BufferedInputStream并保存其参数，输入流in供以后使用。 内部缓冲区数组创建并存储在buf 。
+
+            基本用法:
+                //1:实例化基本流对象
+
+                FileInputStream fis1 = new FileInputStream("D:\\短发睡姿\\王城简历.docx");
+                FileOutputStream fos1 = new FileOutputStream("D:\\短发睡姿\\王城简历copy.docx");
+                BufferedInputStream bis1 = new BufferedInputStream(fis1);
+                BufferedOutputStream bos1 = new BufferedOutputStream(fos1);
+
+                int len;
+                while ((len=bis1.read())!=-1){
+                    bos1.write(len);
+                }
+
+                long end = System.currentTimeMillis();
+                System.out.println(end-star);
+                bos1.close();
+                bis1.close();
+                //只需要关闭缓冲流就可以
+    细节:
+        缓冲流的close方法底层会自动关闭基本流
+        缓冲流底层的数组都是在内存间读写;
+            读写过程为:
+                基本流(输入流)先将数据读出再交给缓冲流;由于缓冲流的缓冲区为8192因此一次读取8192个字节放到缓冲区中
+                再将输入流缓冲区的数据交给输出流缓冲区的数据;再利用基本流将数据写入硬盘上
+                代码中的len就是缓冲区间数据的搬运工;来回搬运数据;
+                若输出流缓冲区数据满了就通过基本流写到硬盘上
+                 若输入流缓冲区的数据读取不到了;再重新从硬盘上读取8192个字节进入到输入流缓冲区中

@@ -1,0 +1,27 @@
+实现多线程的方法2:
+        1:创建一个类,实现Runnable接口
+            public class NewThread implements Runnable{
+
+            }
+        2:重新run方法,设置线程任务
+             @Override
+              public void run() {
+                  for (int i = 0; i < 10; i++) {
+                      System.out.println(Thread.currentThread().getName() + "线程执行的第" + i + "次");
+                  }
+                            }
+        3:利用Thread类的构造方法(自定义线程类将其放入Thread的构造中)
+            Thread(Runnable target[传入的是runnable的实现类])
+            分配一个新的 Thread对象。
+            和Thread产生联系,使创建的类真正的线程类对象
+                NewThread ntd1 = new NewThread();
+                Thread Td = new Thread(ntd1);
+
+        4:调用Thread中的start()方法,开启线程
+             Td.start();
+
+
+
+两种线程实现方式的区别:
+    1:继承Thread;有继承的局限性,不能同时继承两个类
+    2:实现Runnable接口的方法,没有继承的局限性(接口可以多继承多实现;还可以实现接口的同时继承其它的类)

@@ -1,0 +1,13 @@
+Lock(是一个接口):
+        想使用lock(接口)的方法需要使用它的实现类来调用
+        实现类:
+            ReentrantLock
+                方法:
+                    ①:Lock():获取锁
+                    ②:unLock():释放锁
+
+Lock与Synchronized的区别:
+        Synchronized:
+            无论同步代码块还是同步方法都需要在结束一对大括号后才释放锁对象
+        Lock:
+            通过两个方法来控制需要同步的方法;使用的过程更加灵活

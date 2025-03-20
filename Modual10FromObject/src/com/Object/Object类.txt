@@ -1,0 +1,42 @@
+object类:
+        所有是所有类的父类(所有类都会直接或间接0bject类)
+
+    toString方法:在Object类中;该方法返回该对象的字符串表示形式
+        public String toString() {
+               return getClass().getName() + "@" + Integer.toHexString(hashCode());
+           }
+           getClass().getName()代表包名.类名
+           hashCode()返回一个十进制数
+           Integer.toHexString()将括号中的数转为16进制
+    例子:
+        System.out.println(person);//com.Object.Person@b4c966a[因为没重写object类中的toString方法,直接输出对象名会默认调用object类中的toString方法]
+        System.out.println(person.toString());//com.Object.Person@b4c966a
+    ***注意:若没重写object类中的toString方法,直接输出对象名会默认调用object类中的toString方法;会直接输出地址值
+            若重写object类中的toString方法,应该返回重写后toString方法格式的对象的类容
+
+    equals方法:在Object类中;该方法比较两个对象的地址值是否相等
+             public boolean equals(Object obj) {
+                    return (this == obj);
+                }
+      ***注意:若没重写object类中的equals方法,会进行地址值比较
+                若重写object类中的equals方法,会按重写后的规则进行执行
+      例子:public boolean equals(Object object){
+                if(this==object){//解决传输数据为自身问题[提高效率]
+                    return true;
+                }
+                if(object==null){//解决数据null问题
+                    return false;
+                }
+                if (object instanceof Person){//解决传输类型不匹配问题
+                    Person p=(Person) object;//解决类型转换多态问题
+                    return this.name.equals(p.name)&&this.age==p.age&&this.sex== p.sex;
+                }
+                return false;
+            }
+    符号"==":针对于基本数据类型;比较的是值
+            针对引用数据类型;比较的是地址值
+
+clone方法:会复制一个属性值完全相同的新对象
+        使用:
+            1:需要被clone的对象实现Cloneable接口
+            2:重写clone方法

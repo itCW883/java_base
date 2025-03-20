@@ -1,0 +1,52 @@
+反射成员方法:
+    1:利用反射获取public修饰的成员方法:
+        1:Class类中的方法:
+            Method[] getMethods()
+            获取所有public修饰的方法;包括父类中的public修饰的方法
+            返回包含一个数组 方法对象反射由此表示的类或接口的所有公共方法 类对象，包括那些由类或接口和那些从超类和超接口继承的声明。
+        例子:
+            private static void method01() {
+                    Method[] methods01 = a_Person.class.getMethods();
+                    for (Method method : methods01) {
+                        System.out.println(method);
+                    }
+
+    2:利用反射获取public修饰的指定的成员方法(有参,无参):
+         1:Class类中的方法:
+         方法 getMethod(String name, 类<?>... parameterTypes)
+         参数1:传递的是方法名
+         参数2--n:指定参数类型的class对象
+         返回一个 方法对象，它反映此表示的类或接口的指定公共成员方法 类对象。
+
+调用方法:
+    Method对象中的方法:
+    Object invoke(Object obj, Object... args)
+
+    参数1:obj根据构造new实例化的对象
+    参数2:args代表方法实参(有参数传实参;无参数不写)
+    返回值Object 返回的的是被执行方法的返回值;若被执行方法无返回值就不需要接收返回值
+
+    在具有指定参数的 方法对象上调用此 方法对象表示的底层方法。
+
+
+
+    2:利用反射获取private修饰的指定的成员方法(有参,无参):
+    注意:这两个方法不是只能获取私有方法
+         1:方法 getDeclaredMethod(String name, 类<?>... parameterTypes)
+           返回一个 方法对象，它反映此表示的类或接口的指定声明的方法 类对象。
+
+         2:获取所有的私有方法
+           方法[] getDeclaredMethods()
+           返回包含一个数组 方法对象反射的类或接口的所有声明的方法，通过此表示 类对象，包括公共，保护，默认（包）访问和私有方法，但不包括继承的方法。
+
+注意:带Declared不会包括父类中的方法
+
+
+执行私有方法需要暴力反射,解除权限
+private修饰的方法使用需要(暴力反射):
+    Constructor有父类  AccessibleObject
+        AccessibleObject有方法:
+            void setAccessible(boolean flag)
+            该方法可以修改访问权限
+                flag=true   为解除私有权限
+            将此对象的 accessible标志设置为指示的布尔值。

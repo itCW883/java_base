@@ -1,0 +1,58 @@
+Collection接口使用:
+    创建:多态实现接口:
+        Collection<E> 对象名 = new 实现类对象<E>()
+        <E>泛型:决定集合中可以存储何种类型的数据;
+               可以统一元素类型,且泛型中只能写引用数据类型
+               不写则默认为Object类型(可以存储任何类型的数据)[不建议这样使用]
+
+        new 集合对象是 = 前的泛型必须写, = 后的泛型可以不写
+        jvm可推导的就是可省略的
+
+Collection的常用方法:
+     Collection<String> coll1 = new ArrayList<String>();
+            //boolean add(E e) 往集合中存元素 add一定可以添加成功
+            //确保此集合包含指定的元素（可选操作）。
+            coll1.add("哼哼哼");
+            System.out.println(coll1);
+
+            //boolean addAll(Collection<? extends E> c)
+            // 传入的是一个Collection集合;将另一个集合的元素,添加到当前集合中[集合合并]
+            //将指定集合中的所有元素添加到此集合（可选操作）。
+            Collection<String> coll2 = new ArrayList<String>();
+            coll2.add("123");
+            coll1.addAll(coll2);//集合合并
+            System.out.println(coll1);
+
+            //void clear()
+            //从此集合中删除所有元素（可选操作）。
+            coll1.clear();
+            System.out.println("coll1 = " + coll1);
+
+            //boolean contains(Object o)
+            //如果此集合包含指定的元素，则返回 true 。
+            Collection<String> coll3 = new ArrayList<>();
+            coll3.add("456");
+            coll3.add("234");
+            coll3.add("123");
+            System.out.println("coll3 = " + coll3);
+            boolean contains = coll3.contains("123");
+            System.out.println("contains = " + contains);//True
+
+            //boolean isEmpty()
+            //如果此集合不包含元素，如果为空则返回 true 。
+            System.out.println("coll1.isEmpty() = " + coll1.isEmpty());
+
+            //boolean remove(Object o)
+            //从该集合中删除指定元素的单个实例（如果存在）（可选操作）。
+            coll3.remove("456");
+            System.out.println("coll3 = " + coll3);
+
+            //int size()
+            //返回此集合中的元素数。
+            System.out.println("coll3.size() = " + coll3.size());
+。
+            //Object[] toArray()
+            //将集合中元素转存到数组中
+            //返回一个包含此集合中所有元素的数组。
+            Object[] A1 = coll3.toArray();
+            System.out.println("Arrays.toString(A1) = " + Arrays.toString(A1));

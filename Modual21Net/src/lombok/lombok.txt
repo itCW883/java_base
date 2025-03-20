@@ -1,0 +1,18 @@
+lombok:
+    lombok是一个工具:
+        作用:简化Javabean开发
+        使用lombok就可以不用管构造方法和get set方法;会自动维护
+
+    使用步骤:
+        1:下插件(idea2022以后无需下插件自带)
+        2:导入lombok的jar包
+        3:修改设置;设置一些自动编译以及让注解可用的设置
+
+        @Data//包含Tostring,hashCode,equals,无参构造
+             //提高有参构造注解后;就无法使用无参构造;需要在提供无参构造注解
+
+        @Getter
+        @Setter
+        @ToString
+        @AllArgsConstructor//满参构造的注解
+        @NoArgsConstructor//无参构造注解

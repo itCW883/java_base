@@ -1,0 +1,104 @@
+字符流:
+    注意:
+        中文在不同码表中占用的字节数不相同,并非是一个字节(之前循环读取文件出现乱码的原因)
+        UTF-8一个中文三个字节
+        JBK一个中文两个字节
+        字节流每次读取的字节构不成一个汉字;汉字就是显示不了的
+        解决办法:
+            将文本文档中的内容按字符去操作
+            注意:
+                1:按字符操作编码要一致;编码不一致依然会乱码(所有数据都是按二进制存储)
+                2:按字节流操作即使编码一致边读边看也可能乱码
+
+
+字符流操作文本文档:(切记复制操作一定不要用字符流要用字节流)
+    FileReader(字符输入流):
+        父类:Reader
+        作用:将文本文档中的数据读取到内存中
+        构造:
+            FileReader(File file)
+            创建一个新的 FileReader ，给出 File读取。
+
+            FileReader(String fileName)
+            创建一个新的 FileReader ，给定要读取的文件的名称。
+        方法:
+            int read()
+            一次读取一个字符返回的是int类型(读取字符对应的int值)
+                FileReader frd = new FileReader("Modual19IOfLoor\\1.txt");
+                System.out.println((char)frd.read());
+                int len;
+                while ((len=frd.read())!=-1){
+                    System.out.println((char)len);
+                }
+                frd.close();
+
+            int read(char[] cbuf)
+             一次读取一个byte数组返回的是int类型(读取个数)
+                    FileReader frd = new FileReader("Modual19IOfLoor\\1.txt");
+                    char[] chars = new char[100];
+                   // int read = frd.read(chars);//数据已被存入字符数组中了
+                    int len;
+                    while ((len = frd.read(chars))!=-1){
+                        System.out.println(new String(chars,0,len));
+                    }
+             //遍历显示读取的数据(此处写的不太合理)
+            //        for (int i = 0; i < read; i++) {
+            //            System.out.println(chars[i]);
+            //        }
+                    frd.close();
+
+            abstract int read(char[] cbuf, int off, int len)
+             一次读取一个byte数组一部分返回的是int类型(读取个数)
+             abstract void close()
+             关闭流并释放与之相关联的任何系统资源。
+
+
+    FileWriter(字符输出流):
+        父类:Writer
+        作用:将数据写入文件中
+        构造:
+            FileWriter(File file)
+            给一个File对象构造一个FileWriter对象。
+
+            FileWriter(File file, boolean append)
+            给一个File对象构造一个FileWriter对象。
+            可以追加续写不会覆盖
+
+            FileWriter(String fileName)
+            构造一个给定文件名的FileWriter对象。
+
+        方法:
+             FileWriter fw = new FileWriter("Modual19IOfLoor\\src\\b_ByteFloor\\a_2.txt",true);
+             //void write(int c)
+             // 写一个字符
+             fw.write('马');
+             // void write(char[] cbuf)
+             // 写入一个字符数组。
+             char[] chars = {'\n','一','次','传','人','一','个','子','符','数','组','马','哥','瘦','皮','猴','\n'};
+             fw.write(chars);
+             // abstract void write(char[] cbuf, int off, int len)
+             // 写入字符数组的一部分。
+             fw.write(chars,5,10);
+             // void write(String str)
+             // 写一个字符串
+             String date ="一次传入一个字符串怒发冲冠凭栏处,潇潇雨歇抬望眼\n";
+             fw.write(date);
+             // void write(String str, int off, int len)
+             // 写一个字符串的一部分。
+             //len表示从其实元素开始传入多少个字符
+             fw.write(date,4,15);
+
+             //abstract void flush()
+             //将缓冲区的数据刷到文件中
+             fw.flush();//可以直接关闭;因为close也会将缓冲区中的数据刷到文件中
+
+             // abstract void close()
+             // 关闭流，先刷新
+             fw.close();//必须要关闭数据才会写入文件中去
+                         //原因:filewriter底层自带一个缓冲区;因此需要将缓冲区的数据刷到文件中
+
+    close与flush的区别:
+        flush():将缓冲区中的数据刷到文件中去,流对象并未关闭;后续流对象仍可以继续使用
+        close():将缓冲区的文件先刷入文件中;然后关闭流对象
+
+

@@ -1,0 +1,120 @@
+<>泛型:
+    作用:
+        统一数据类型防止将来数据转换异常
+    注意:
+        1:泛型中的数据类型必须是引用类型
+        2:如果泛型不写,默认为object类型
+
+
+为什么需要使用泛型:
+    1:从使用层面上来说:
+        统一数据类型,防止将来的数据类型转换
+    2从定义层面来看:
+        定义带泛型的类,方法等,将来泛型使用的时候确定什么类型,泛型就会变为什么类型,凡是涉及泛型的在使用时都会变为确定的类型;使代码更加灵活
+
+
+泛型的定义:
+    1:定义含有泛型的类
+        public class a_demoo1Generics <X>{
+            //定义一个书数组;充当ArryList底层的数组,直接规定为10
+            Object[] obj=new Object[10];
+            //定义size;代表集合元素个数
+            int size;
+            //定义一个add方法,参数类型需要和泛型类型保持一致
+            //数据类型为x变量名随便取
+            public boolean add(X x){
+                obj[size]=x;
+                size++;
+                return true;
+            }
+            //定义一个get方法,根据索引获取元素
+            public X get(int index){
+                return (X) obj[index];//需要强转为为泛型;方便后面使用的时候转为object的子类类型
+            }
+
+            //定义tostring方法
+            @Override
+            public String toString() {
+                return Arrays.toString(obj);//打印数组中的数据
+            }
+        }
+
+    2:含有泛型的方法
+        格式:
+            修饰符 <E> 返回值类型 方法名(E e){
+            方法体
+            }
+        含有泛型的方法在调用的时候确定类型
+     例:
+         //定义一个静态方法addall
+            public static <E> void addAll(ArrayList<E> list,E...e){
+                          //E ...e代表可变参;可以传入多个参数
+                          //<E>只代表声明了泛型并不代表反回值类型
+                          //需要单独声明返回值类型
+
+                //list.add(e);//不能直接传e因为定义函数时,接收的是可变参;可变参是一个数组;需要进行遍历;然后在添加元素
+                for (E e1 : e) {
+                    list.add(e1);
+                }
+
+            }
+
+    3.含有泛型的接口:
+        格式:public interface 接口名<E>{
+
+        }
+        什么时候能确定类型:
+            ①在实现类类的时候还未确定类型;只能在对其的实现类进行实例化时确定类型(依然需要重写方法;只是重写的方法的数据类型依然是泛型类型)
+         接口:
+            public interface a_myInterfaceDemo01<E> {
+                public boolean add(E e);
+            }
+         实现类:
+            public class a_myInterfaceDemo02<E> implements a_myInterfaceDemo01<E>{
+
+                Object[] obj = new Object[10];
+                int size;
+
+                public E get(int indext) {
+                    return (E) obj[indext];
+                }
+
+                @Override
+                public String toString() {
+                    return Arrays.toString(obj);
+                }
+
+                @Override
+                public boolean add(E e) {
+                    obj[size]=e;
+                    size++;
+                    return true;
+                }
+            }
+        测试类:
+            public class a_interfaceTest {
+                public static void main(String[] args) {
+                    a_myInterfaceDemo02<String> str1 = new a_myInterfaceDemo02<>();
+                    str1.add("瘦皮猴");
+                    System.out.println(str1);
+                }
+            }
+        ②在实现类时就直接确定类型
+            接口:
+            public interface b_myIterator <E>{
+                   E next();
+               }
+            实现类:
+            public class b_myterator2 implements b_myIterator<String>{
+                @Override
+                public String next() {
+                    return "我是瘦皮猴的室友";
+                }
+            }
+            测试类:
+            public class b_Test02 {
+                    public static void main(String[] args) {
+                        b_myterator2 mi = new b_myterator2();
+                        System.out.println(mi.next());
+                    }
+                }

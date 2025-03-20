@@ -1,0 +1,68 @@
+反射成员变量
+ Class类中的方法
+    1:获取所有public成员变量
+    获取所有public修饰的属性
+     Field[] getFields()
+     返回包含一个数组 Field对象反射由此表示的类或接口的所有可访问的公共字段 类对象。
+
+    2:获取指定的public成员变量
+     Field getField(String name)
+     返回一个 Field对象，它反映此表示的类或接口的指定公共成员字段 类对象。
+
+
+    3:获取所有的成员变量
+        Field[] getDeclaredFields()
+        返回的数组 Field对象反映此表示的类或接口声明的所有字段 类对象。
+
+    4:获取指定的的成员变量
+        Field getDeclaredField(String name)
+        返回一个 Field对象，它反映此表示的类或接口的指定已声明字段 类对象。
+
+二:赋值取值
+    Field类中的方法
+        取值:
+        Object get(Object obj)
+        obj对象;这个对象是通过class对象实例化的对象;不是class对象
+        返回该所表示的字段的值 Field ，指定的对象上。
+
+        赋值:
+        void set(Object obj, Object value)
+        obj:对象
+        value:赋予的值
+        将指定对象参数上的此 Field对象表示的字段设置为指定的新值。
+
+
+操作私有属性依然需要暴力反射:
+      AccessibleObject有方法:
+
+        void setAccessible(boolean flag)
+        该方法可以修改访问权限
+            flag=true   为解除私有权限
+        将此对象的 accessible标志设置为指示的布尔值。
+
+        综合案例:
+                    Class<a_Person> aClass = a_Person.class;//创建class类对象
+                    a_Person aPerson = aClass.newInstance();//通过class对象实例化一个类对象
+                    System.out.println("===========获取所有被public修饰的成员变量=========");
+                    Field[] fields = aClass.getFields();//获取所有被public修饰的成员变量
+                    for (Field field : fields) {
+                        System.out.println(field);
+                    }
+                    System.out.println("===========获取某个指定的被public修饰的成员变量=========");
+                    Field weight = aClass.getField("weight");//获取某个指定的被public修饰的成员变量weight
+                    System.out.println(weight);
+                    weight.set(aPerson,1000);
+                    System.out.println(weight.get(aPerson));
+
+                    System.out.println("===========获取所有成员变量=========");
+                    Field[] declaredFields = aClass.getDeclaredFields();//获取所有成员变量
+                    for (Field declaredField : declaredFields) {
+                        System.out.println(declaredField);
+                    }
+                    System.out.println("===========获取某个指定的成员变量=========");
+                    Field name = aClass.getDeclaredField("name");//获取指定的成员变量name
+                    name.setAccessible(true);//使用私有属性;暴力反射
+
+                    System.out.println(name);
+                    name.set(aPerson,"瘦皮猴");
+                    System.out.println(name.get(aPerson));

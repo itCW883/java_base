@@ -1,0 +1,101 @@
+集合嵌套:
+一:Lit_in_List
+    Lit_in_ListDemo01 {
+        public static void main(String[] args) {
+            ArrayList<String> list1 = new ArrayList<>();
+            ArrayList<String> list2 = new ArrayList<>();
+            list1.add("马哥");
+            list1.add("瘦皮猴");
+            list1.add("黑娃");
+            list1.add("蔡国庆");
+            list2.add("涛哥");
+            list2.add("哼哼哼");
+            list2.add("三上");
+            list2.add("精炼");
+
+
+            //将集合存入另一个集合中
+            //因为存入的元素是list所有泛型的类型也要选择相应的list类型
+            ArrayList<ArrayList> lists = new ArrayList<>();
+            lists.add(list1);
+            lists.add(list2);
+            System.out.println(lists);
+
+            //集合嵌套的遍历
+            for (ArrayList list : lists) {
+                for (Object o : list) {
+                    System.out.println(o);
+                }
+            }
+        }
+    }
+
+二:Map_In_List
+    public class b_Map_In_List {
+        public static void main(String[] args) {
+            HashMap map1 = new HashMap<String,String>();
+            HashMap map2 = new HashMap<String,String>();
+            map1.put("马哥","涛哥");
+            map1.put("瘦皮猴","哼哼");
+            map1.put("黑娃","三上");
+            map1.put("蔡国庆","精炼");
+            map2.put("mag","马哥");
+            map2.put("sph","瘦皮猴");
+            map2.put("heiw","黑娃");
+            map2.put("cgq","杀杀杀");
+            ArrayList<HashMap> hm = new ArrayList<>();
+            hm.add(map1);
+            hm.add(map2);
+            System.out.println(hm);
+            for (HashMap hashMap : hm) {
+                //获取所有的key,存入到集合中
+                Set set = hashMap.entrySet();
+                for (Object o : set) {
+                    System.out.println(o);
+                }
+                System.out.println("=========================");
+                Set set1 = hashMap.keySet();
+                for (Object o : set1) {
+                    System.out.println(hashMap.get(o));
+                }
+                System.out.println("=========================");
+            }
+        }
+    }
+
+
+
+三:Map_In_Map
+public class c_Map_In_Map {
+    public static void main(String[] args) {
+        HashMap map1 = new HashMap<String,String>();
+        HashMap map2 = new HashMap<String,String>();
+        map1.put("马哥","涛哥");
+        map1.put("瘦皮猴","哼哼");
+        map1.put("黑娃","三上");
+        map1.put("蔡国庆","精炼");
+        map2.put("mag","马哥");
+        map2.put("sph","瘦皮猴");
+        map2.put("heiw","黑娃");
+        map2.put("cgq","杀杀杀");
+        HashMap<String, HashMap> sth = new HashMap<>();
+        sth.put("麻瓜",map1);
+        sth.put("嗨嗨嗨",map2);
+        Set<Map.Entry<String, HashMap>> entries = sth.entrySet();
+        for (Map.Entry<String, HashMap> entry : entries) {
+            String key = entry.getKey();
+            System.out.println(entry);
+            HashMap value = entry.getValue();
+            Set set = value.entrySet();
+            for (Object o : set) {
+                System.out.println(o);
+            }
+        }
+
+        Set<String> strings = sth.keySet();
+        for (String s : strings) {
+            System.out.println(sth.get(s));
+
+        }
+    }
+}

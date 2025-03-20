@@ -1,0 +1,46 @@
+UDP协议编程:
+两个相关对象:
+    DatagramSocket:类似于寄快递时选择快递公式
+    DatagramPacket:类似快递公司打包快递
+单播:
+发送端(客户端):
+          1:创建 DatagramSocket(需要先指定发送端端口号)
+                  注意:①空参构造:端口号会从可用端口号中随机选取一个使用;
+                      ②有参构造:需要自己指定端口号
+            DatagramSocket datagramSocket = new DatagramSocket();
+
+             2:创建DatagramPacket对象;将数据进行打包
+
+                            注意:①打包要发送的数据-->将要发送的数据放入byte数组中
+                    byte[] bytes = "马哥瘦皮猴".getBytes();
+                                ②指定接收端的IP
+                    InetAddress aimip =InetAddress.getByName("171.0.0.1");
+                                ③:指定接收端的端口号
+                    int port = 666;
+            DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length, aimip, port);
+                    //第二个参数是指定发送的数据的数组长度
+
+          3:发送数据
+            datagramSocket.send(datagramPacket);
+          4:手动关闭Socket的对象释放资源
+            datagramSocket.close();//因为是UDP协议编程即使没有接受端;执行发送端也不会报错;意外UDP面向无连接
+
+
+接收端(服务端):
+        1:创建 DatagramSocket;需要指定服务端的端口号
+        DatagramSocket datagramSocket = new DatagramSocket(666);//端口号就是发送端的目的地端口号
+        2:接收数据包
+            byte[] bytes = new byte[1024];//数组容量习惯是1024的倍数;用于存放发送端发送的数据;这里的byte数组是小写的byte
+            DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length);
+            System.out.println("我会在你接受到数据之前被发送出来");
+        datagramSocket.receive(datagramPacket);//该方法是阻塞的;程序执行到这该方法会在这死等;等到发送端成功发送数据过来;才会向下走
+        3:解析数据包
+        byte[] data = datagramPacket.getData();//获取数据
+        int len = datagramPacket.getLength();//从数据包中获取多少个数据
+        InetAddress address = datagramPacket.getAddress();//获取发送端的主机IP地址
+        int port = datagramSocket.getPort();//获取发送端端口号
+            String s = new String(data,0, len);//表示把data数组从0索引开始一共len个字节转换为String
+            System.out.println("发送过来的数据时 " + s);
+            System.out.println("该数据的发送地址是"+address+"...发送的端口号是"+port);
+        4:释放资源;关闭资源
+        datagramSocket.close();

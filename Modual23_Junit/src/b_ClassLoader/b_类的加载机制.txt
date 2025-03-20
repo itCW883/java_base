@@ -1,0 +1,40 @@
+类的加载机制:
+    类的加载时机:
+        1:new对象
+        2:new子类对象(new 子类对象先初始化父类)
+        3:执行main方法
+        4:调用静态成员
+        5:利用反射创建Class对象
+        上述情况就可以将类加载到内存中
+
+类加载器(ClassLoader)JDK8时:
+    概述:
+        在jvm中,负责将本地上的class文件加载到内存的对象_ClassLoader
+        所有的类加载器都有一个父类:ClassLoader
+        不同的类需要不同的类加载器加载到内存中
+
+    类加载器的分类:
+        1:BootStrapClassLoader:根类加载器,由C语言编写,我们是获取不到的
+                               也被称为引导加载器,负责java的核心类加载
+                               如:System/String类都是核心类
+                               jre/lib/rt.jar路径下的类都是核心类
+        2:ExtClassLoader:扩展类加载器
+                         负责jre中的扩展目录中的jar包的加载
+                         在jdk中的jre的lib目录下的ext目录
+        3:AppClassLoader:系统类加载器
+                         负责在jvm启动时加载来自java命令的class文件(自定义类),以及classPath环境变量所指定的jar包(第三方jar包的类)
+
+    三种 类加载器的关系:
+        从类加载机制层面看:(双亲委派,全盘负责委托机制)
+            AppClassLoader-->ExtClassLoader-->BootStrapClassLoader(-->代表父类)
+        在代码层面:三种 类加载器并没有子父类继承关系:但是三者都要共同父类ClassLoader
+
+获取类加载器对象:
+    getClassLoader()是Class对象中的方法
+    格式:
+        类名.class.getClassLoader()
+
+
+双亲委派(全盘委托机制)
+    先找自身的缓存;缓存无向上一层一层访问;直至顶层;顶层在查找是否是属于自己的加载范围;不是就一层一层向下继续查找
+    向上委托;向下查找;保证了类在内存中的唯一性

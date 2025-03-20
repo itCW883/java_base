@@ -1,0 +1,29 @@
+字符缓冲流:
+    字符流的基本流底层是有缓冲区的;效率上效果变化不明显
+
+字符缓冲输出流的基本用法和字符流的用法基本一样
+    字符缓冲流的特有方法:
+
+    字符缓冲输出流:
+        构造方法:
+            BufferedWriter(Writer out)
+            创建使用默认大小的输出缓冲区的缓冲字符输出流。
+            例:
+               FileWriter fileWriter = new FileWriter("Modual20IOFlow2\\src\\a_BufferFlow\\a_CharBufferFlow\\a_ByteBufferFlow\\test.txt",true);
+        特有方法:
+            void newLine()
+            写一行行分隔符。
+            例:
+               bufWriter.write("床前明月光");
+
+   字符缓冲输入流:
+          构造方法:
+              BufferedReader(Reader in)
+              创建使用默认大小的输入缓冲区的缓冲字符输入流。
+              例:
+                BufferedReader bufReader = new BufferedReader(new FileReader("Modual20IOFlow2\\src\\a_BufferFlow\\a_CharBufferFlow\\a_ByteBufferFlow\\test.txt"));
+          特有方法:
+              String readLine()
+              一次读一行文字。;若读到结束标记返回null
+              例:
+                bufReader.readLine()

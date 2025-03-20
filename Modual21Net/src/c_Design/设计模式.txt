@@ -1,0 +1,78 @@
+设计模式
+设计模式的分类:
+    1:创建型模式2:结构型模式3:性行型模式
+
+    模板方法设计模式
+        1:模板方法模式:
+            在一个通用的模板下
+            框架中有一部分功能是明确的(直接实现)
+            还有一部分功能是不明确的(需要在子类中实现;使用抽象方法[abstract])
+
+        例子:
+            父类:
+            public abstract class a_Hotel {
+                public void eat(){
+                    System.out.println("点菜");
+                    eatcai();
+                    System.out.println("买单");
+                }
+
+               public abstract void eatcai();
+            }
+
+            子类:
+            public class a_MaLaTang extends a_Hotel{
+
+                @Override
+                public void eatcai() {
+                    System.out.println("辣酱");
+                    System.out.println("方便面");
+                    System.out.println("豌豆尖");
+                }
+            }
+
+
+        2:单例模式:
+            目的:单(一个)例(实例(对象));让一个类只产生一个对象供外界使用
+
+            分类:
+                饿汉式:
+                     //饿汉式
+                     public class a_Singleton {
+                         //需要防止外界随意使用构造方法new对象,需要将构造私有化
+                         private a_Singleton(){};
+                         //静态成员会最早产生(因此适合饿汉式),但是不能让外界随便调用因此还需要private关键字修饰
+                         //为了赶紧new对象,new对象时让对象变为静态的让对象随着类的加载而加载,
+                         //为了不让外界随便使用类名调用这个静态对象;因此使用private关键字进行修饰;将其变为私有的
+                         private static a_Singleton singleton=new a_Singleton();
+                         //为了将内部new出来的对象给外界;可以定义一个方法;将内部的对象返回给外界
+                         public static a_Singleton getSingleton(){
+                             return singleton;
+                         }
+                     }
+                     使用方式:
+                     public static void main(String[] args) {
+                         for (int i = 0; i < 10; i++) {
+                             a_Singleton singleton = a_Singleton.getSingleton();
+                             System.out.println(singleton);
+                         }
+                     }
+                懒汉式:(可能会存在线程安全问题)
+                    不着急new对象;想什么时候使用什么时候new对象
+                     //需要防止外界随意使用构造方法new对象,需要将构造私有化
+                        private b_Singleton02(){};
+                        //懒汉式;不着急new对象
+                        private static b_Singleton02 singleton02=null;
+                        //为了将内部new出来的对象给外界;可以定义一个方法;将内部的对象返回给外界
+                        public static b_Singleton02 getSingleton02(){
+                            //重点    //singleton02=new b_Singleton02();//不合理;因为外界调用一次就会new一个对象;就不是单例模式了
+                            //若b_Singleton02不是null就没有必要抢锁了
+                            if(singleton02==null){
+                                synchronized (b_Singleton02.class){//同步锁
+                                    if(singleton02==null){//不能去掉去掉会重复new对象
+                                        singleton02=new b_Singleton02();//存在线程安全问题;需要加锁;(同步锁类名.class)
+                                    }
+                                }
+                            }
+                            return singleton02;
+                        }

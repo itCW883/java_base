@@ -1,0 +1,25 @@
+字符串hash值计算:
+    任何数据和255做&运算都是原值
+    计算哈希值时有一个定值31,31是一个质素;用31可以尽量降低内容不一样hash值一样的情况
+
+    哈希冲突/哈希碰撞:哈希值一样;内容不一样
+
+自定义类型比较hash值 :
+    1:如果hashset村存储自定义类型的,若要去重复;需要重写hashcode和equals方法;让hashset比较属性的hash值和属性的内容
+    2:若不重写hashcode和equals方法,默认调用的就是Object中的方法了,
+        不同的对象肯定会有不同的hash值,equals比较的对象地址肯定也会不一样,所有此时即使对象的属性一样也不能去重复
+
+
+
+   b_hash_employee taog = new b_hash_employee("taog", 20);
+   b_hash_employee mag = new b_hash_employee("mag", 100);
+   b_hash_employee tag = new b_hash_employee("taog", 20);
+   b_hash_employee sph = new b_hash_employee("sph", 100);
+   set.add(tag);
+   set.add(mag);
+   set.add(sph);
+   set.add(taog);
+   System.out.println("set = " + set);
+   //set = [b_hash_employee{name='taog', age=20}, b_hash_employee{name='mag', age=100}, b_hash_employee{name='sph', age=100}]\
+   //只有一个taog原因是b_hash_employee重写了equals方法和hsahcode方法
+   //若不重重就会出现两个taog;因为不重写hshcode方法比较的是对象的hash值;这里比较的是个对象内容的hash值
